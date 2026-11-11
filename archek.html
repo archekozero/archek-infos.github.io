@@ -1,0 +1,381 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Mes liens et projets</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: une seule colonne façon fiche d'index. En-tête, liste de contacts en lignes, projet Rose en carte à écran sombre. */
+:root {
+  --bg: #050507;
+  --surface: rgba(10, 12, 17, 0.8);
+  --fg: #ECEFF4;
+  --muted: #98A2B0;
+  --line: #242934;
+  --accent: #A9C4FF;
+  --accent-ink: #A9C4FF;
+  --tile: #0B0B0D;
+  --tile-dot: #1C1C20;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
+
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 40px;
+}
+.wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 4px; }
+
+.label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* En-tête */
+header { display: flex; flex-direction: column; gap: 18px; }
+h1 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(44px, 11vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  margin: 0;
+  text-wrap: balance;
+}
+.bio { max-width: 52ch; margin: 0; font-size: 19px; color: var(--muted); }
+.bio strong { color: var(--fg); font-weight: 600; }
+
+h2 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 28px;
+  letter-spacing: -0.02em;
+  margin: 0;
+  text-wrap: balance;
+}
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+
+/* Contacts */
+.contacts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.contacts li { border-bottom: 1px solid var(--line); }
+.row, .copy-row {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 4px;
+}
+.row { text-decoration: none; transition: background-color 0.15s, padding-left 0.15s; }
+.row .name, .copy-row .name { font-family: var(--font-display); font-weight: 500; font-size: 20px; }
+.row .handle { font-family: var(--font-mono); font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.copy-row .handle { font-family: var(--font-mono); font-size: 14px; color: var(--fg); overflow-wrap: anywhere; user-select: all; }
+.row .go { font-family: var(--font-mono); font-size: 18px; color: var(--accent-ink); transition: transform 0.15s; }
+a.row:hover { background: var(--surface); padding-left: 12px; }
+a.row:hover .go { transform: translateX(4px); }
+
+.copy {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  background: transparent;
+  color: var(--fg);
+  border: 1px solid var(--fg);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.copy:hover { background: var(--fg); color: var(--bg); }
+
+/* Projet Rose */
+.project {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.screen {
+  background-color: var(--tile);
+  background-image: radial-gradient(var(--tile-dot) 1px, transparent 1px);
+  background-size: 16px 16px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 28px 16px 20px;
+  min-height: 260px;
+}
+.sprite {
+  width: 128px;
+  max-width: 100%;
+  height: auto;
+  image-rendering: pixelated;
+  animation: bob 1.2s steps(2, jump-none) infinite alternate;
+}
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+.project-body { padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.project h3 { font-family: var(--font-display); font-weight: 700; font-size: 30px; letter-spacing: -0.02em; margin: 0; }
+.project p { margin: 0; color: var(--muted); font-size: 17px; max-width: 46ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+.tag { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); }
+
+/* Projets futurs */
+.future { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.future li {
+  display: grid;
+  grid-template-columns: 112px minmax(0, 1fr);
+  column-gap: 12px;
+  row-gap: 2px;
+  padding: 18px 4px;
+  border-bottom: 1px solid var(--line);
+}
+.future .label { grid-row: 1 / span 2; padding-top: 7px; }
+.future h3 { font-family: var(--font-display); font-weight: 500; font-size: 22px; margin: 0; }
+.future p { margin: 0; color: var(--muted); font-size: 16px; max-width: 52ch; }
+.future li:last-child .label { color: var(--accent-ink); }
+
+footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 18px; }
+
+@media (max-width: 560px) {
+  body { padding-block: 32px 28px; font-size: 16px; }
+  .row, .copy-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; }
+  .row .name, .copy-row .name { grid-column: 1; }
+  .row .handle, .copy-row .handle { grid-column: 1; grid-row: 2; }
+  .row .go, .copy-row .copy { grid-column: 2; grid-row: 1 / span 2; }
+  .project { grid-template-columns: minmax(0, 1fr); }
+  .future li { grid-template-columns: minmax(0, 1fr); }
+  .future .label { grid-row: auto; padding-top: 0; }
+  .screen { min-height: 220px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .sprite { animation: none; }
+}
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<div class="wrap">
+  <header>
+    <span class="label">Liens et projets</span>
+    <h1>Archek</h1>
+    <p class="bio">Je m'appelle <strong>Archek</strong>, je suis étudiant ingénieur en informatique et je développe <strong>Rose</strong> pour votre plaisir.</p>
+  </header>
+
+  <section aria-labelledby="contact-title">
+    <div class="section-head">
+      <h2 id="contact-title">Me retrouver</h2>
+      <span class="label">4 façons de me joindre</span>
+    </div>
+    <ul class="contacts">
+      <li>
+        <a class="row" href="https://www.instagram.com/reihane_zero" target="_blank" rel="noopener">
+          <span class="name">Instagram</span>
+          <span class="handle">@reihane_zero</span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://fr.linkedin.com/in/reihane-bodart-4313a9407" target="_blank" rel="noopener">
+          <span class="name">LinkedIn</span>
+          <span class="handle">Reihane Bodart</span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <a class="row" href="https://discord.gg/ysQG9vwy8J" target="_blank" rel="noopener">
+          <span class="name">Discord</span>
+          <span class="handle">Serveur de connaissances</span>
+          <span class="go" aria-hidden="true">→</span>
+        </a>
+      </li>
+      <li>
+        <div class="copy-row">
+          <span class="name">E-mail</span>
+          <span class="handle" id="mail-address">reihane.bodart.01@gmail.com</span>
+          <button class="copy" type="button" data-target="mail-address" aria-live="polite">Copier</button>
+        </div>
+      </li>
+    </ul>
+  </section>
+
+  <section aria-labelledby="projects-title">
+    <div class="section-head">
+      <h2 id="projects-title">Projets</h2>
+      <span class="label">En cours</span>
+    </div>
+    <article class="project">
+      <div class="screen">
+        <img class="sprite" alt="Rose, un petit personnage en pixel art aux cheveux orange et au pull rose" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABgCAYAAACtxXToAAACk0lEQVR42u2cMUjDQBSGL1GkYGNQHCoKASdL3Ry0kyAiOjiJk5Ozbo46dtRNZycnEQcHi6jQqXYoLkqdxEwKCqKpKAWpU4ac9eLxcjlr/rell97lvrz/3XvXNIZt20yn5bL55nWtbOga32QJN1P33Z/dOGa5bL4JD0gaAP/uM8aYTi8wdU1e5nOVZsS5CvgT9O98KysW5hhjjMW1MsQC4DcT1wUCHqAjEWoFIu6Jaw2CP01SR0aobRm8rpUN/64XC3NMVzqc+ETIQDEED7AZaoEEW6fqATzPI+X3lmUZ8AAAAIC/GwPCNP65v0Tqv2Nxr6kyRkACAIBM0Fas8Y+Q9hQ1RpDyCEgAABADbKHm6RpnSmOAbIzgYwIkAABJjwGmaYZo/iPiIVNaJ8zHBEgAALAfwBRrHh4AAADQTjGgtHUZOJ5cy2ut96lW2irDAwAAAAj7AVlnJNC+M9CQjBF6Nb5y3xU4rrk38AAAAABBDBjqGyT9ns/HiKmLW+H55xPDwnbZ7/OahwcAAADI1QL8Ojk6Pi7s4PPhRWpA99kLHDc3J8TnHwfPd3ot0oSRB0ACABDvc4J36zkpzfPGn8/3d3v2Dg8AAADQGAM6MvwzRo/wAAAAgH+0J8hbWG1wValI1ftU4/cL+D1MPvfHM0KQAACInxHadnaFX5jv74n2Ck5nxO3TJ1LdHT29CttX3WV4AAAAQIz7AaotTPPwAAAAAFotwOcF5DwgZN1vjB4Gjrsy3aThnOoCagFIAAAIeUDkuT88AAAAoK3/O+yOHShd93mTzQPC1n14AAAAgFwewGvIqS4IY0Lj4S2oYeIFfuuPWBvAAwAAAKJ9mxz1XWFRm+x7hbAKqOw8nU6T3wRXr9eVetgXgBfaVdpW/wMAAAAASUVORK5CYII=">
+      </div>
+      <div class="project-body">
+        <span class="label">Assistante IA vocale</span>
+        <h3>Rose</h3>
+        <p>Rose s'utilise à la voix. Tu lui donnes une commande, elle l'exécute, et elle se balade sur ton bureau sous la forme d'un petit personnage en pixel art.</p>
+        <div class="tags"><span class="tag">IA</span><span class="tag">Commande vocale</span><span class="tag">Pixel art</span><span class="tag">Bureau</span></div>
+      </div>
+    </article>
+  </section>
+
+  <section aria-labelledby="future-title">
+    <div class="section-head">
+      <h2 id="future-title">Projets futurs</h2>
+      <span class="label">3 étapes prévues</span>
+    </div>
+    <ul class="future">
+      <li>
+        <span class="label">À venir</span>
+        <h3>Un cyberdeck</h3>
+        <p>La création de mon propre cyberdeck.</p>
+      </li>
+      <li>
+        <span class="label">À venir</span>
+        <h3>Rose sous clé</h3>
+        <p>Rose sur une clé, qui se lance automatiquement sur n'importe quel système d'exploitation.</p>
+      </li>
+      <li>
+        <span class="label">Projet final</span>
+        <h3>Une vraie IA</h3>
+        <p>Le but de tout le reste.</p>
+      </li>
+    </ul>
+  </section>
+
+  <footer>
+    <span class="label">Archek</span>
+    <span class="label">Mis à jour en novembre 2026</span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btns = document.querySelectorAll(".copy");
+  function selectText(el) {
+    try {
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    } catch (e) {}
+  }
+  Array.prototype.forEach.call(btns, function (btn) {
+    var target = document.getElementById(btn.getAttribute("data-target"));
+    if (!target) return;
+    btn.addEventListener("click", function () {
+      var done = function (msg) {
+        btn.textContent = msg;
+        setTimeout(function () { btn.textContent = "Copier"; }, 1800);
+      };
+      try {
+        navigator.clipboard.writeText(target.textContent.trim()).then(
+          function () { done("Copié"); },
+          function () { selectText(target); done("Sélectionné"); }
+        );
+      } catch (e) {
+        selectText(target);
+        done("Sélectionné");
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var cv = document.getElementById("sky");
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d");
+  var reduce = false;
+  try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+
+  var TINTS = ["255,255,255", "200,220,255", "255,232,214", "255,196,224"];
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  var stars = [];
+  for (var i = 0; i < 280; i++) {
+    stars.push({
+      x: rnd(), y: rnd(),
+      r: 0.4 + Math.pow(rnd(), 3) * 1.6,
+      d: 0.15 + rnd() * 0.85,
+      p: rnd() * 6.283,
+      f: 0.6 + rnd() * 2.2,
+      b: 0.35 + rnd() * 0.65,
+      c: TINTS[Math.floor(rnd() * TINTS.length)]
+    });
+  }
+
+  var W = 0, H = 0, dpr = 1, energy = 0, lastY = null, running = false;
+
+  function draw() {
+    var sy = window.pageYOffset || document.documentElement.scrollTop || 0;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var n = Math.min(stars.length, Math.max(90, Math.floor(W * H / 4200)));
+    for (var i = 0; i < n; i++) {
+      var s = stars[i];
+      var x = s.x * W;
+      var y = (((s.y * H - sy * s.d * 0.12) % H) + H) % H;
+      var tw = 0.5 + 0.5 * Math.sin(s.p + sy * 0.012 * s.f);
+      var a = Math.min(1, s.b * (0.16 + 0.84 * tw) * (0.85 + energy * 0.9));
+      ctx.fillStyle = "rgba(" + s.c + "," + a.toFixed(3) + ")";
+      ctx.beginPath();
+      ctx.arc(x, y, s.r * (0.85 + 0.3 * tw), 0, 6.283);
+      ctx.fill();
+      if (s.r > 1.3 && tw > 0.75) {
+        var L = s.r * (3 + 4 * energy) * tw;
+        ctx.strokeStyle = "rgba(" + s.c + "," + (a * 0.55).toFixed(3) + ")";
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(x - L, y); ctx.lineTo(x + L, y);
+        ctx.moveTo(x, y - L); ctx.lineTo(x, y + L);
+        ctx.stroke();
+      }
+    }
+  }
+
+  function loop() {
+    energy *= 0.93;
+    if (energy < 0.02) { energy = 0; running = false; draw(); return; }
+    draw();
+    requestAnimationFrame(loop);
+  }
+  function onScroll() {
+    var y = window.pageYOffset || 0;
+    if (lastY !== null) energy = Math.min(1, energy + Math.abs(y - lastY) / 240);
+    lastY = y;
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth || window.innerWidth;
+    H = cv.clientHeight || window.innerHeight;
+    cv.width = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    draw();
+  }
+
+  window.addEventListener("resize", resize);
+  resize();
+  if (!reduce) window.addEventListener("scroll", onScroll, { passive: true });
+})();
+</script>
+
+</body></html>
