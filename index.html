@@ -1,4 +1,4 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!doctype html><html lang="fr"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
 <title>Mes liens et projets</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
@@ -136,6 +136,31 @@ a.row:hover .go { transform: translateX(4px); }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
 .tag { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); }
 
+/* Carte Rose cliquable + halo rose */
+.project {
+  --rose: #f08ab8;
+  --glow: var(--near, 0);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-color: var(--line);
+  border-color: color-mix(in srgb, var(--rose) calc(var(--glow) * 100%), var(--line));
+  box-shadow: 0 0 calc(44px * var(--glow)) calc(2px * var(--glow)) rgba(240, 138, 184, calc(0.4 * var(--glow)));
+  transition: box-shadow 0.15s linear, border-color 0.15s linear;
+}
+.project:hover, .project:focus-visible { --glow: 1; }
+.project:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; }
+.screen {
+  box-shadow: inset 0 0 calc(80px * var(--glow)) rgba(240, 138, 184, calc(0.5 * var(--glow)));
+  transition: box-shadow 0.15s linear;
+}
+.sprite {
+  filter: drop-shadow(0 0 calc(18px * var(--glow)) rgba(240, 138, 184, calc(0.95 * var(--glow))));
+  transition: filter 0.15s linear;
+}
+.see { font-family: var(--font-mono); font-size: 13px; color: var(--rose); }
+.project:hover .see { text-decoration: underline; }
+
 /* Projets futurs */
 .future { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .future li {
@@ -221,7 +246,7 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
       <h2 id="projects-title">Projets</h2>
       <span class="label">En cours</span>
     </div>
-    <article class="project">
+    <a class="project" href="https://archekozero.github.io/archek-infos-rose.github.io/">
       <div class="screen">
         <img class="sprite" alt="Rose, un petit personnage en pixel art aux cheveux orange et au pull rose" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABgCAYAAACtxXToAAACk0lEQVR42u2cMUjDQBSGL1GkYGNQHCoKASdL3Ry0kyAiOjiJk5Ozbo46dtRNZycnEQcHi6jQqXYoLkqdxEwKCqKpKAWpU4ac9eLxcjlr/rell97lvrz/3XvXNIZt20yn5bL55nWtbOga32QJN1P33Z/dOGa5bL4JD0gaAP/uM8aYTi8wdU1e5nOVZsS5CvgT9O98KysW5hhjjMW1MsQC4DcT1wUCHqAjEWoFIu6Jaw2CP01SR0aobRm8rpUN/64XC3NMVzqc+ETIQDEED7AZaoEEW6fqATzPI+X3lmUZ8AAAAIC/GwPCNP65v0Tqv2Nxr6kyRkACAIBM0Fas8Y+Q9hQ1RpDyCEgAABADbKHm6RpnSmOAbIzgYwIkAABJjwGmaYZo/iPiIVNaJ8zHBEgAALAfwBRrHh4AAADQTjGgtHUZOJ5cy2ut96lW2irDAwAAAAj7AVlnJNC+M9CQjBF6Nb5y3xU4rrk38AAAAABBDBjqGyT9ns/HiKmLW+H55xPDwnbZ7/OahwcAAADI1QL8Ojk6Pi7s4PPhRWpA99kLHDc3J8TnHwfPd3ot0oSRB0ACABDvc4J36zkpzfPGn8/3d3v2Dg8AAADQGAM6MvwzRo/wAAAAgH+0J8hbWG1wValI1ftU4/cL+D1MPvfHM0KQAACInxHadnaFX5jv74n2Ck5nxO3TJ1LdHT29CttX3WV4AAAAQIz7AaotTPPwAAAAAFotwOcF5DwgZN1vjB4Gjrsy3aThnOoCagFIAAAIeUDkuT88AAAAoK3/O+yOHShd93mTzQPC1n14AAAAgFwewGvIqS4IY0Lj4S2oYeIFfuuPWBvAAwAAAKJ9mxz1XWFRm+x7hbAKqOw8nU6T3wRXr9eVetgXgBfaVdpW/wMAAAAASUVORK5CYII=">
       </div>
@@ -230,8 +255,9 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
         <h3>Rose</h3>
         <p>Rose s'utilise à la voix. Tu lui donnes une commande, elle l'exécute, et elle se balade sur ton bureau sous la forme d'un petit personnage en pixel art.</p>
         <div class="tags"><span class="tag">IA</span><span class="tag">Commande vocale</span><span class="tag">Pixel art</span><span class="tag">Bureau</span></div>
+        <span class="see">Voir l'évolution de Rose →</span>
       </div>
-    </article>
+    </a>
   </section>
 
   <section aria-labelledby="future-title">
@@ -375,6 +401,28 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
   window.addEventListener("resize", resize);
   resize();
   if (!reduce) window.addEventListener("scroll", onScroll, { passive: true });
+})();
+</script>
+
+<script>
+/* Halo rose de la carte Rose quand la souris s'approche */
+(function () {
+  var card = document.querySelector(".project");
+  var screen = card && card.querySelector(".screen");
+  if (!card || !screen) return;
+  var RADIUS = 260, px = -9999, py = -9999, busy = false;
+  function update() {
+    busy = false;
+    var r = screen.getBoundingClientRect();
+    var dx = Math.max(r.left - px, 0, px - r.right);
+    var dy = Math.max(r.top - py, 0, py - r.bottom);
+    var d = Math.hypot(dx, dy);
+    card.style.setProperty("--near", Math.max(0, 1 - d / RADIUS).toFixed(2));
+  }
+  function ask() { if (!busy) { busy = true; requestAnimationFrame(update); } }
+  addEventListener("pointermove", function (e) { px = e.clientX; py = e.clientY; ask(); }, { passive: true });
+  addEventListener("scroll", ask, { passive: true });
+  document.documentElement.addEventListener("mouseleave", function () { px = py = -9999; ask(); });
 })();
 </script>
 
