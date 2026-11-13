@@ -3,7 +3,6 @@
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
 <style>
-/* Layout: une seule colonne façon fiche d'index. En-tête, liste de contacts en lignes, projet Rose en carte à écran sombre. */
 :root {
   --bg: #050507;
   --surface: rgba(10, 12, 17, 0.8);
@@ -19,9 +18,7 @@
   --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
   color-scheme: dark;
 }
-
 #sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
-
 * { box-sizing: border-box; }
 body {
   background: var(--bg);
@@ -34,52 +31,18 @@ body {
   padding-block: 48px 40px;
 }
 .wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
-
 a { color: inherit; }
 a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 4px; }
-
-.label {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-/* En-tête */
+.label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
 header { display: flex; flex-direction: column; gap: 18px; }
-h1 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: clamp(44px, 11vw, 84px);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
-  margin: 0;
-  text-wrap: balance;
-}
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(44px, 11vw, 84px); line-height: 0.98; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
 .bio { max-width: 52ch; margin: 0; font-size: 19px; color: var(--muted); }
 .bio strong { color: var(--fg); font-weight: 600; }
-
-h2 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 28px;
-  letter-spacing: -0.02em;
-  margin: 0;
-  text-wrap: balance;
-}
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
 .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
-
-/* Contacts */
 .contacts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
 .contacts li { border-bottom: 1px solid var(--line); }
-.row, .copy-row {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 12px;
-  padding: 18px 4px;
-}
+.row, .copy-row { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 18px 4px; }
 .row { text-decoration: none; transition: background-color 0.15s, padding-left 0.15s; }
 .row .name, .copy-row .name { font-family: var(--font-display); font-weight: 500; font-size: 20px; }
 .row .handle { font-family: var(--font-mono); font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
@@ -87,56 +50,17 @@ h2 {
 .row .go { font-family: var(--font-mono); font-size: 18px; color: var(--accent-ink); transition: transform 0.15s; }
 a.row:hover { background: var(--surface); padding-left: 12px; }
 a.row:hover .go { transform: translateX(4px); }
-
-.copy {
-  font-family: var(--font-mono);
-  font-size: 12px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: transparent;
-  color: var(--fg);
-  border: 1px solid var(--fg);
-  border-radius: 999px;
-  padding: 7px 14px;
-  cursor: pointer;
-  transition: background-color 0.15s, color 0.15s;
-}
+.copy { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; color: var(--fg); border: 1px solid var(--fg); border-radius: 999px; padding: 7px 14px; cursor: pointer; transition: background-color 0.15s, color 0.15s; }
 .copy:hover { background: var(--fg); color: var(--bg); }
-
-/* Projet Rose */
-.project {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 10px;
-  overflow: hidden;
-}
-.screen {
-  background-color: var(--tile);
-  background-image: radial-gradient(var(--tile-dot) 1px, transparent 1px);
-  background-size: 16px 16px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 28px 16px 20px;
-  min-height: 260px;
-}
-.sprite {
-  width: 128px;
-  max-width: 100%;
-  height: auto;
-  image-rendering: pixelated;
-  animation: bob 1.2s steps(2, jump-none) infinite alternate;
-}
+.project { display: grid; grid-template-columns: 220px minmax(0, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.screen { background-color: var(--tile); background-image: radial-gradient(var(--tile-dot) 1px, transparent 1px); background-size: 16px 16px; display: flex; align-items: flex-end; justify-content: center; padding: 28px 16px 20px; min-height: 260px; }
+.sprite { width: 128px; max-width: 100%; height: auto; image-rendering: pixelated; animation: bob 1.2s steps(2, jump-none) infinite alternate; }
 @keyframes bob { from { transform: translateY(0); } to { transform: translateY(-6px); } }
 .project-body { padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
 .project h3 { font-family: var(--font-display); font-weight: 700; font-size: 30px; letter-spacing: -0.02em; margin: 0; }
 .project p { margin: 0; color: var(--muted); font-size: 17px; max-width: 46ch; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
 .tag { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); }
-
-/* Carte Rose cliquable + halo rose */
 .project {
   --rose: #f08ab8;
   --glow: var(--near, 0);
@@ -150,34 +74,22 @@ a.row:hover .go { transform: translateX(4px); }
 }
 .project:hover, .project:focus-visible { --glow: 1; }
 .project:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; }
-.screen {
-  box-shadow: inset 0 0 calc(80px * var(--glow)) rgba(240, 138, 184, calc(0.5 * var(--glow)));
-  transition: box-shadow 0.15s linear;
-}
-.sprite {
-  filter: drop-shadow(0 0 calc(18px * var(--glow)) rgba(240, 138, 184, calc(0.95 * var(--glow))));
-  transition: filter 0.15s linear;
-}
+.screen { box-shadow: inset 0 0 calc(80px * var(--glow)) rgba(240, 138, 184, calc(0.5 * var(--glow))); transition: box-shadow 0.15s linear; }
+.sprite { filter: drop-shadow(0 0 calc(18px * var(--glow)) rgba(240, 138, 184, calc(0.95 * var(--glow)))); transition: filter 0.15s linear; }
 .see { font-family: var(--font-mono); font-size: 13px; color: var(--rose); }
 .project:hover .see { text-decoration: underline; }
-
-/* Projets futurs */
 .future { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
-.future li {
-  display: grid;
-  grid-template-columns: 112px minmax(0, 1fr);
-  column-gap: 12px;
-  row-gap: 2px;
-  padding: 18px 4px;
-  border-bottom: 1px solid var(--line);
-}
+.future li { display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; padding: 18px 4px; border-bottom: 1px solid var(--line); }
 .future .label { grid-row: 1 / span 2; padding-top: 7px; }
 .future h3 { font-family: var(--font-display); font-weight: 500; font-size: 22px; margin: 0; }
+.future h3 a { text-decoration: none; }
+.future h3 a:hover { color: var(--accent-ink); }
 .future p { margin: 0; color: var(--muted); font-size: 16px; max-width: 52ch; }
+.future .idea { display: inline-block; margin-top: 4px; font-family: var(--font-mono); font-size: 13px; color: var(--accent-ink); }
 .future li:last-child .label { color: var(--accent-ink); }
-
 footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 18px; }
-
+footer a { text-decoration: none; }
+footer a:hover { color: var(--fg); }
 @media (max-width: 560px) {
   body { padding-block: 32px 28px; font-size: 16px; }
   .row, .copy-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; }
@@ -193,6 +105,60 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
   * { transition: none !important; }
   .sprite { animation: none; }
 }
+
+.fcards { display: flex; flex-direction: column; gap: 16px; }
+.fcard { display: grid; grid-template-columns: 160px minmax(0, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow 0.15s, border-color 0.15s; }
+.fcard:hover, .fcard:focus-visible { border-color: var(--c); box-shadow: 0 0 36px 1px rgba(var(--cr), 0.35); }
+.fcard:focus-visible { outline: 2px solid var(--c); outline-offset: 4px; }
+.fscreen { background-color: var(--tile); background-image: radial-gradient(rgba(var(--cr), 0.28), transparent 75%), radial-gradient(var(--tile-dot) 1px, transparent 1px); background-size: auto, 16px 16px; display: flex; align-items: flex-end; justify-content: center; padding: 22px 12px 16px; min-height: 150px; }
+.fimg { width: 96px; max-width: 100%; height: auto; image-rendering: pixelated; animation: bob 1.2s steps(2, jump-none) infinite alternate; }
+.fbody { padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fbody h3 { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin: 0; }
+.fbody p { margin: 0; color: var(--muted); font-size: 16px; max-width: 46ch; }
+.fbody .label { color: var(--c); }
+.fsee { font-family: var(--font-mono); font-size: 13px; color: var(--c); margin-top: auto; padding-top: 6px; }
+.fcard:hover .fsee { text-decoration: underline; }
+@media (max-width: 560px) { .fcard { grid-template-columns: minmax(0, 1fr); } .fscreen { min-height: 140px; } }
+@media (prefers-reduced-motion: reduce) { .fimg { animation: none; } }
+.row .name,.copy-row .name{display:flex;align-items:center;gap:12px}.ico{flex:none;image-rendering:pixelated}a.row:hover .ico{transform:scale(1.12)}.ico{transition:transform .15s}
+.conv{display:flex;flex-direction:column;gap:4px;padding:22px 24px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;transition:border-color .15s,box-shadow .15s}.conv strong{font-family:var(--font-display);font-size:28px;letter-spacing:-.02em}.conv span:last-child{color:#B48CFF;font-size:16px}.conv:hover{border-color:#B48CFF;box-shadow:0 0 36px 1px rgba(180,140,255,.35)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--muted);background:var(--surface)}
+.par span:last-child{color:#4FE3C1}.par:hover{border-color:#4FE3C1;box-shadow:0 0 36px 1px rgba(79,227,193,.35)}
+
+/* ---- liens v2 ---- */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+h1{background:linear-gradient(100deg,#ECEFF4 0%,#ECEFF4 35%,#f6b8d4 50%,#A9C4FF 62%,#ECEFF4 78%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shine 7s ease-in-out infinite alternate}
+@keyframes shine{from{background-position:100% 0}to{background-position:0 0}}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.lcard{--rx:0deg;--ry:0deg;--ty:0px;--mx:50%;--my:50%;position:relative;isolation:isolate;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px 18px;min-height:84px;border-radius:16px;background-color:var(--tile);background-image:radial-gradient(circle at 88% 0%,rgba(var(--cr),.16),transparent 62%),radial-gradient(var(--tile-dot) 1px,transparent 1px);background-size:auto,16px 16px;border:1px solid var(--line);text-decoration:none;color:inherit;cursor:pointer;overflow:hidden;transform:perspective(800px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--ty));transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .3s}
+.lcard::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--mx) var(--my),rgba(var(--cr),.22),transparent 65%);opacity:0;transition:opacity .25s}
+.lcard::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;z-index:-1;background:conic-gradient(from var(--ang),transparent 0 55%,var(--c) 80%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:0;transition:opacity .3s}
+.lcard:hover,.lcard:focus-visible{--ty:-4px;border-color:rgba(var(--cr),.45);box-shadow:0 18px 44px -14px rgba(var(--cr),.45),0 0 0 1px rgba(var(--cr),.12)}
+.lcard:hover::before,.lcard:focus-visible::before{opacity:1}
+.lcard:hover::after,.lcard:focus-visible::after{opacity:1;animation:spin 2.6s linear infinite}
+.lcard:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+@keyframes spin{to{--ang:360deg}}
+.licon{display:grid;place-items:center;width:48px;height:48px;border-radius:10px;background:rgba(5,5,7,.55);border:1px solid rgba(var(--cr),.3);box-shadow:0 0 18px -4px rgba(var(--cr),.5);transition:border-color .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.lcard:hover .licon{border-color:rgba(var(--cr),.6);transform:rotate(-6deg) scale(1.08)}
+.lcard .ico{width:24px;height:24px}
+a.row:hover .ico{transform:none}
+.ltxt{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.lname{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.01em}
+.lhandle{font-family:var(--font-mono);font-size:13px;color:var(--c);overflow-wrap:anywhere;margin-top:2px}
+.lsub{font-size:14px;color:var(--muted);margin-top:4px;max-height:0;opacity:0;overflow:hidden;transition:max-height .3s,opacity .3s}
+.lcard:hover .lsub,.lcard:focus-visible .lsub{max-height:48px;opacity:1}
+.larrow{font-family:var(--font-mono);font-size:22px;color:var(--c);opacity:.55;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s}
+.lcard:hover .larrow{transform:translate(4px,-4px);opacity:1}
+.lmail{grid-template-columns:auto minmax(0,1fr)}.lmail .lhandle{overflow-wrap:anywhere;font-size:12.5px}.lmail .copy{grid-column:2;justify-self:start;margin-top:2px}.lmail .lsub{max-height:48px;opacity:1}
+.lmail .copy{border-color:var(--c);color:var(--c);position:relative;z-index:1}
+.lmail .copy:hover{background:var(--c);color:#050507}
+.lmail.ok{border-color:var(--c);box-shadow:0 0 40px -6px rgba(var(--cr),.6)}
+@media (hover:none){.lsub{max-height:48px;opacity:1}}
+@media (max-width:560px){.links{grid-template-columns:minmax(0,1fr)}.lcard{padding:16px;gap:14px;min-height:92px}.licon{width:44px;height:44px}}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}}
+.js .reveal{opacity:0}
+.js .reveal.in{opacity:1;animation:rise .75s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*90ms)}
+@media (prefers-reduced-motion:reduce){h1{animation:none}.js .reveal,.js .reveal.in{opacity:1;animation:none}.lcard,.lcard *{transition:none!important;animation:none!important}.lcard{transform:none}}
 </style>
 
 <canvas id="sky" aria-hidden="true"></canvas>
@@ -202,6 +168,7 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
     <span class="label">Liens et projets</span>
     <h1>Archek</h1>
     <p class="bio">Je m'appelle <strong>Archek</strong>, je suis étudiant ingénieur en informatique et je développe <strong>Rose</strong> pour votre plaisir.</p>
+    <div class="chips"><span class="chip">Étudiant ingénieur</span><span class="chip">IA vocale</span><span class="chip">Matériel &amp; fabrication</span><span class="chip">Gratuit &amp; pour tous</span></div>
   </header>
 
   <section aria-labelledby="contact-title">
@@ -209,36 +176,28 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
       <h2 id="contact-title">Me retrouver</h2>
       <span class="label">4 façons de me joindre</span>
     </div>
-    <ul class="contacts">
-      <li>
-        <a class="row" href="https://www.instagram.com/reihane_zero" target="_blank" rel="noopener">
-          <span class="name">Instagram</span>
-          <span class="handle">@reihane_zero</span>
-          <span class="go" aria-hidden="true">→</span>
-        </a>
-      </li>
-      <li>
-        <a class="row" href="https://fr.linkedin.com/in/reihane-bodart-4313a9407" target="_blank" rel="noopener">
-          <span class="name">LinkedIn</span>
-          <span class="handle">Reihane Bodart</span>
-          <span class="go" aria-hidden="true">→</span>
-        </a>
-      </li>
-      <li>
-        <a class="row" href="https://discord.gg/ysQG9vwy8J" target="_blank" rel="noopener">
-          <span class="name">Discord</span>
-          <span class="handle">Serveur de connaissances</span>
-          <span class="go" aria-hidden="true">→</span>
-        </a>
-      </li>
-      <li>
-        <div class="copy-row">
-          <span class="name">E-mail</span>
-          <span class="handle" id="mail-address">reihane.bodart.01@gmail.com</span>
-          <button class="copy" type="button" data-target="mail-address" aria-live="polite">Copier</button>
-        </div>
-      </li>
-    </ul>
+    <div class="links">
+      <a class="lcard" style="--c:#f08ab8;--cr:240,138,184;--i:0" href="https://www.instagram.com/reihane_zero" target="_blank" rel="noopener">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 11" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #f08ab866)"><rect x="1" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="2" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="9" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="10" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="1" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="1" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="2" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="2" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="2" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="8" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="8" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="9" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="9" width="1" height="1" style="fill:#f08ab8"/><rect x="1" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="2" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="9" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="10" y="10" width="1" height="1" style="fill:#f08ab8"/></svg></span>
+        <span class="ltxt"><span class="lname">Instagram</span><span class="lhandle">reihane_zero</span><span class="lsub">Coulisses &amp; actus de Rose</span></span>
+        <span class="larrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="lcard" style="--c:#7FA2FF;--cr:127,162,255;--i:1" href="https://fr.linkedin.com/in/reihane-bodart-4313a9407" target="_blank" rel="noopener">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #7FA2FF66)"><rect x="1" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="2" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="6" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="7" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="8" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="6" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="6" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="6" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="7" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="7" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="7" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="8" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="8" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="8" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="9" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="9" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="9" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="11" width="1" height="1" style="fill:#7FA2FF"/></svg></span>
+        <span class="ltxt"><span class="lname">LinkedIn</span><span class="lhandle">Reihane Bodart</span><span class="lsub">Parcours &amp; réseau pro</span></span>
+        <span class="larrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="lcard" style="--c:#A9A6FF;--cr:169,166,255;--i:2" href="https://discord.gg/ysQG9vwy8J" target="_blank" rel="noopener">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 10" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #A9A6FF66)"><rect x="2" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="4" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="10" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="4" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="10" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="9" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="9" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="9" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="9" width="1" height="1" style="fill:#A9A6FF"/></svg></span>
+        <span class="ltxt"><span class="lname">Discord</span><span class="lhandle">Serveur de connaissances</span><span class="lsub">Viens discuter avec nous</span></span>
+        <span class="larrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="lcard lmail" style="--c:#FFD27F;--cr:255,210,127;--i:3" tabindex="0" role="group" aria-label="E-mail">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #FFD27F66)"><rect x="0" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="1" width="1" height="1" style="fill:var(--bg)"/><rect x="2" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="1" width="1" height="1" style="fill:var(--bg)"/><rect x="11" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="2" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="2" width="1" height="1" style="fill:var(--bg)"/><rect x="10" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="3" width="1" height="1" style="fill:var(--bg)"/><rect x="4" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="3" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="6" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="7" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="8" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="7" width="1" height="1" style="fill:#FFD27F"/></svg></span>
+        <span class="ltxt"><span class="lname">E-mail</span><span class="lhandle" id="mail-address">reihane.bodart.01@gmail.com</span><span class="lsub">Clique pour copier l'adresse</span></span>
+        <button class="copy" type="button" data-target="mail-address" aria-live="polite">Copier</button>
+      </div>
+    </div>
   </section>
 
   <section aria-labelledby="projects-title">
@@ -265,27 +224,54 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
       <h2 id="future-title">Projets futurs</h2>
       <span class="label">3 étapes prévues</span>
     </div>
-    <ul class="future">
-      <li>
-        <span class="label">À venir</span>
-        <h3>Un cyberdeck</h3>
-        <p>La création de mon propre cyberdeck.</p>
-      </li>
-      <li>
-        <span class="label">À venir</span>
-        <h3>Rose sous clé</h3>
-        <p>Rose sur une clé, qui se lance automatiquement sur n'importe quel système d'exploitation.</p>
-      </li>
-      <li>
-        <span class="label">Projet final</span>
-        <h3>Une vraie IA</h3>
-        <p>Le but de tout le reste.</p>
-      </li>
-    </ul>
+    <div class="fcards">
+      <a class="fcard" href="projet-cyberdeck.html" style="--c:#FF5C6C;--cr:255,92,108">
+        <div class="fscreen"><svg class="fimg" viewBox="0 0 22 14" role="img" aria-label="Cyberdeck en pixel art, un petit ordinateur portable rouge" shape-rendering="crispEdges" style="filter:drop-shadow(0 0 18px rgba(255,92,108,.7))"><rect x="3" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="1" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="1" width="1" height="1" fill="#1A0509"/><rect x="5" y="1" width="1" height="1" fill="#1A0509"/><rect x="6" y="1" width="1" height="1" fill="#1A0509"/><rect x="7" y="1" width="1" height="1" fill="#1A0509"/><rect x="8" y="1" width="1" height="1" fill="#1A0509"/><rect x="9" y="1" width="1" height="1" fill="#1A0509"/><rect x="10" y="1" width="1" height="1" fill="#1A0509"/><rect x="11" y="1" width="1" height="1" fill="#1A0509"/><rect x="12" y="1" width="1" height="1" fill="#1A0509"/><rect x="13" y="1" width="1" height="1" fill="#1A0509"/><rect x="14" y="1" width="1" height="1" fill="#1A0509"/><rect x="15" y="1" width="1" height="1" fill="#1A0509"/><rect x="16" y="1" width="1" height="1" fill="#1A0509"/><rect x="17" y="1" width="1" height="1" fill="#1A0509"/><rect x="18" y="1" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="2" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="2" width="1" height="1" fill="#1A0509"/><rect x="5" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="6" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="7" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="8" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="9" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="10" y="2" width="1" height="1" fill="#1A0509"/><rect x="11" y="2" width="1" height="1" fill="#1A0509"/><rect x="12" y="2" width="1" height="1" fill="#1A0509"/><rect x="13" y="2" width="1" height="1" fill="#1A0509"/><rect x="14" y="2" width="1" height="1" fill="#1A0509"/><rect x="15" y="2" width="1" height="1" fill="#1A0509"/><rect x="16" y="2" width="1" height="1" fill="#1A0509"/><rect x="17" y="2" width="1" height="1" fill="#1A0509"/><rect x="18" y="2" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="3" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="3" width="1" height="1" fill="#1A0509"/><rect x="5" y="3" width="1" height="1" fill="#1A0509"/><rect x="6" y="3" width="1" height="1" fill="#1A0509"/><rect x="7" y="3" width="1" height="1" fill="#1A0509"/><rect x="8" y="3" width="1" height="1" fill="#1A0509"/><rect x="9" y="3" width="1" height="1" fill="#1A0509"/><rect x="10" y="3" width="1" height="1" fill="#1A0509"/><rect x="11" y="3" width="1" height="1" fill="#1A0509"/><rect x="12" y="3" width="1" height="1" fill="#1A0509"/><rect x="13" y="3" width="1" height="1" fill="#1A0509"/><rect x="14" y="3" width="1" height="1" fill="#1A0509"/><rect x="15" y="3" width="1" height="1" fill="#1A0509"/><rect x="16" y="3" width="1" height="1" fill="#1A0509"/><rect x="17" y="3" width="1" height="1" fill="#1A0509"/><rect x="18" y="3" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="4" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="4" width="1" height="1" fill="#1A0509"/><rect x="5" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="6" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="7" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="8" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="9" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="10" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="11" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="12" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="13" y="4" width="1" height="1" fill="#1A0509"/><rect x="14" y="4" width="1" height="1" fill="#1A0509"/><rect x="15" y="4" width="1" height="1" fill="#1A0509"/><rect x="16" y="4" width="1" height="1" fill="#1A0509"/><rect x="17" y="4" width="1" height="1" fill="#1A0509"/><rect x="18" y="4" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="5" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="5" width="1" height="1" fill="#1A0509"/><rect x="5" y="5" width="1" height="1" fill="#1A0509"/><rect x="6" y="5" width="1" height="1" fill="#1A0509"/><rect x="7" y="5" width="1" height="1" fill="#1A0509"/><rect x="8" y="5" width="1" height="1" fill="#1A0509"/><rect x="9" y="5" width="1" height="1" fill="#1A0509"/><rect x="10" y="5" width="1" height="1" fill="#1A0509"/><rect x="11" y="5" width="1" height="1" fill="#1A0509"/><rect x="12" y="5" width="1" height="1" fill="#1A0509"/><rect x="13" y="5" width="1" height="1" fill="#1A0509"/><rect x="14" y="5" width="1" height="1" fill="#1A0509"/><rect x="15" y="5" width="1" height="1" fill="#1A0509"/><rect x="16" y="5" width="1" height="1" fill="#1A0509"/><rect x="17" y="5" width="1" height="1" fill="#1A0509"/><rect x="18" y="5" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="6" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="6" width="1" height="1" fill="#1A0509"/><rect x="5" y="6" width="1" height="1" fill="#FF9AA5"/><rect x="6" y="6" width="1" height="1" fill="#FF9AA5"/><rect x="7" y="6" width="1" height="1" fill="#1A0509"/><rect x="8" y="6" width="1" height="1" fill="#1A0509"/><rect x="9" y="6" width="1" height="1" fill="#1A0509"/><rect x="10" y="6" width="1" height="1" fill="#1A0509"/><rect x="11" y="6" width="1" height="1" fill="#1A0509"/><rect x="12" y="6" width="1" height="1" fill="#1A0509"/><rect x="13" y="6" width="1" height="1" fill="#1A0509"/><rect x="14" y="6" width="1" height="1" fill="#1A0509"/><rect x="15" y="6" width="1" height="1" fill="#1A0509"/><rect x="16" y="6" width="1" height="1" fill="#1A0509"/><rect x="17" y="6" width="1" height="1" fill="#1A0509"/><rect x="18" y="6" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="7" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="7" width="1" height="1" fill="#1A0509"/><rect x="5" y="7" width="1" height="1" fill="#1A0509"/><rect x="6" y="7" width="1" height="1" fill="#1A0509"/><rect x="7" y="7" width="1" height="1" fill="#1A0509"/><rect x="8" y="7" width="1" height="1" fill="#1A0509"/><rect x="9" y="7" width="1" height="1" fill="#1A0509"/><rect x="10" y="7" width="1" height="1" fill="#1A0509"/><rect x="11" y="7" width="1" height="1" fill="#1A0509"/><rect x="12" y="7" width="1" height="1" fill="#1A0509"/><rect x="13" y="7" width="1" height="1" fill="#1A0509"/><rect x="14" y="7" width="1" height="1" fill="#1A0509"/><rect x="15" y="7" width="1" height="1" fill="#1A0509"/><rect x="16" y="7" width="1" height="1" fill="#1A0509"/><rect x="17" y="7" width="1" height="1" fill="#1A0509"/><rect x="18" y="7" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="19" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="10" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="10" width="1" height="1" fill="#3A0E15"/><rect x="4" y="10" width="1" height="1" fill="#3A0E15"/><rect x="5" y="10" width="1" height="1" fill="#3A0E15"/><rect x="6" y="10" width="1" height="1" fill="#3A0E15"/><rect x="7" y="10" width="1" height="1" fill="#3A0E15"/><rect x="8" y="10" width="1" height="1" fill="#3A0E15"/><rect x="9" y="10" width="1" height="1" fill="#3A0E15"/><rect x="10" y="10" width="1" height="1" fill="#3A0E15"/><rect x="11" y="10" width="1" height="1" fill="#3A0E15"/><rect x="12" y="10" width="1" height="1" fill="#3A0E15"/><rect x="13" y="10" width="1" height="1" fill="#3A0E15"/><rect x="14" y="10" width="1" height="1" fill="#3A0E15"/><rect x="15" y="10" width="1" height="1" fill="#3A0E15"/><rect x="16" y="10" width="1" height="1" fill="#3A0E15"/><rect x="17" y="10" width="1" height="1" fill="#3A0E15"/><rect x="18" y="10" width="1" height="1" fill="#3A0E15"/><rect x="19" y="10" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="11" width="1" height="1" fill="#3A0E15"/><rect x="4" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="11" width="1" height="1" fill="#3A0E15"/><rect x="6" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="11" width="1" height="1" fill="#3A0E15"/><rect x="8" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="11" width="1" height="1" fill="#3A0E15"/><rect x="10" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="11" width="1" height="1" fill="#3A0E15"/><rect x="12" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="11" width="1" height="1" fill="#3A0E15"/><rect x="14" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="11" width="1" height="1" fill="#3A0E15"/><rect x="16" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="11" width="1" height="1" fill="#3A0E15"/><rect x="18" y="11" width="1" height="1" fill="#3A0E15"/><rect x="19" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="12" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="12" width="1" height="1" fill="#3A0E15"/><rect x="4" y="12" width="1" height="1" fill="#3A0E15"/><rect x="5" y="12" width="1" height="1" fill="#3A0E15"/><rect x="6" y="12" width="1" height="1" fill="#3A0E15"/><rect x="7" y="12" width="1" height="1" fill="#3A0E15"/><rect x="8" y="12" width="1" height="1" fill="#3A0E15"/><rect x="9" y="12" width="1" height="1" fill="#3A0E15"/><rect x="10" y="12" width="1" height="1" fill="#3A0E15"/><rect x="11" y="12" width="1" height="1" fill="#3A0E15"/><rect x="12" y="12" width="1" height="1" fill="#3A0E15"/><rect x="13" y="12" width="1" height="1" fill="#3A0E15"/><rect x="14" y="12" width="1" height="1" fill="#3A0E15"/><rect x="15" y="12" width="1" height="1" fill="#3A0E15"/><rect x="16" y="12" width="1" height="1" fill="#3A0E15"/><rect x="17" y="12" width="1" height="1" fill="#3A0E15"/><rect x="18" y="12" width="1" height="1" fill="#3A0E15"/><rect x="19" y="12" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="19" y="13" width="1" height="1" fill="#FF5C6C"/></svg></div>
+        <div class="fbody">
+          <span class="label">À venir</span>
+          <h3>Un cyberdeck</h3>
+          <p>Mon propre ordinateur de poche, fait main et inspiré des réseaux sociaux.</p>
+          <span class="fsee">L'idée derrière →</span>
+        </div>
+      </a>
+      <a class="fcard" href="projet-rose-sous-cle.html" style="--c:#7FA2FF;--cr:127,162,255">
+        <div class="fscreen"><svg class="fimg" viewBox="0 0 24 14" role="img" aria-label="Clé USB en pixel art, bleu nuit, avec une petite lumière rose" shape-rendering="crispEdges" style="filter:drop-shadow(0 0 18px rgba(127,162,255,.7))"><rect x="2" y="5" width="6" height="4" fill="#C9D3E8"/><rect x="3" y="6" width="2" height="2" fill="#070B24"/><rect x="5" y="6" width="2" height="2" fill="#070B24"/><rect x="8" y="3" width="14" height="8" fill="#A9C4FF"/><rect x="9" y="4" width="12" height="6" fill="#3C5BD6"/><rect x="10" y="5" width="9" height="1" fill="#5B7BF0"/><rect x="11" y="7" width="3" height="2" fill="#070B24"/><rect x="17" y="6" width="3" height="3" fill="#f08ab8"/><rect x="18" y="5" width="1" height="1" fill="#ffd0e6"/></svg></div>
+        <div class="fbody">
+          <span class="label">À venir</span>
+          <h3>Rose sous clé</h3>
+          <p>Rose sur une clé USB qui se lance sur n'importe quel système, inspirée de Capri dans Edgerunners 2.</p>
+          <span class="fsee">L'idée derrière →</span>
+        </div>
+      </a>
+      <a class="fcard" href="projet-vraie-ia.html" style="--c:#FFFFFF;--cr:255,255,255">
+        <div class="fscreen"><svg class="fimg" viewBox="0 0 17 17" role="img" aria-label="Une IA en pixel art, une sphère blanche lumineuse avec deux yeux" shape-rendering="crispEdges" style="filter:drop-shadow(0 0 18px rgba(255,255,255,.75))"><rect x="6" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="11" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="11" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="7" width="2" height="3" fill="#07080C"/><rect x="10" y="7" width="2" height="3" fill="#07080C"/><rect x="15" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="16" y="0" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="0" width="1" height="1" fill="#C9D3FF"/><rect x="1" y="15" width="1" height="1" fill="#FFFFFF"/></svg></div>
+        <div class="fbody">
+          <span class="label">Projet final</span>
+          <h3>Une vraie IA</h3>
+          <p>Une IA gratuite pour tous, née de mes rêves d'enfant.</p>
+          <span class="fsee">L'idée derrière →</span>
+        </div>
+      </a>
+    </div>
   </section>
+
+  <a class="conv par" href="parcours.html">
+    <span class="label">Qui je suis</span>
+    <strong>Mon parcours</strong>
+    <span>Étudiant ingénieur en informatique à l'EILCO. →</span>
+  </a>
+
+  <a class="conv" href="convictions.html">
+    <span class="label">Ce en quoi je crois</span>
+    <strong>Mes convictions</strong>
+    <span>L'IA est une alliée pour tous, jamais une remplaçante. →</span>
+  </a>
 
   <footer>
     <span class="label">Archek</span>
+    <a class="label" href="parcours.html">Parcours</a><a class="label" href="convictions.html">Mes convictions</a>
+    <a class="label" href="mentions-legales.html">Mentions légales</a>
+    <a class="label" href="https://archekozero.github.io/archek-infos-rose.github.io/">Rose</a>
     <span class="label">Mis à jour en novembre 2026</span>
   </footer>
 </div>
@@ -331,25 +317,14 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
   var ctx = cv.getContext("2d");
   var reduce = false;
   try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
-
   var TINTS = ["255,255,255", "200,220,255", "255,232,214", "255,196,224"];
   var seed = 7;
   function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
   var stars = [];
   for (var i = 0; i < 280; i++) {
-    stars.push({
-      x: rnd(), y: rnd(),
-      r: 0.4 + Math.pow(rnd(), 3) * 1.6,
-      d: 0.15 + rnd() * 0.85,
-      p: rnd() * 6.283,
-      f: 0.6 + rnd() * 2.2,
-      b: 0.35 + rnd() * 0.65,
-      c: TINTS[Math.floor(rnd() * TINTS.length)]
-    });
+    stars.push({ x: rnd(), y: rnd(), r: 0.4 + Math.pow(rnd(), 3) * 1.6, d: 0.15 + rnd() * 0.85, p: rnd() * 6.283, f: 0.6 + rnd() * 2.2, b: 0.35 + rnd() * 0.65, c: TINTS[Math.floor(rnd() * TINTS.length)] });
   }
-
   var W = 0, H = 0, dpr = 1, energy = 0, lastY = null, running = false;
-
   function draw() {
     var sy = window.pageYOffset || document.documentElement.scrollTop || 0;
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -376,7 +351,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
       }
     }
   }
-
   function loop() {
     energy *= 0.93;
     if (energy < 0.02) { energy = 0; running = false; draw(); return; }
@@ -397,7 +371,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
     cv.height = Math.round(H * dpr);
     draw();
   }
-
   window.addEventListener("resize", resize);
   resize();
   if (!reduce) window.addEventListener("scroll", onScroll, { passive: true });
@@ -405,7 +378,6 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
 </script>
 
 <script>
-/* Halo rose de la carte Rose quand la souris s'approche */
 (function () {
   var card = document.querySelector(".project");
   var screen = card && card.querySelector(".screen");
@@ -426,4 +398,40 @@ footer { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wr
 })();
 </script>
 
+
+<script>
+(function () {
+  var d = document, rm = false;
+  try { rm = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+  d.documentElement.classList.add("js");
+  var els = d.querySelectorAll("header, section, .conv, footer");
+  Array.prototype.forEach.call(els, function (el) { el.classList.add("reveal"); });
+  var cards = d.querySelectorAll(".lcard");
+  Array.prototype.forEach.call(cards, function (c) { c.classList.add("reveal"); });
+  function show(el) { el.classList.add("in"); }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    Array.prototype.forEach.call(d.querySelectorAll(".reveal"), function (el) { io.observe(el); });
+  } else { Array.prototype.forEach.call(d.querySelectorAll(".reveal"), show); }
+  if (rm) return;
+  Array.prototype.forEach.call(cards, function (c) {
+    c.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.setProperty("--mx", (x * 100) + "%"); c.style.setProperty("--my", (y * 100) + "%");
+      c.style.setProperty("--ry", ((x - .5) * 9).toFixed(2) + "deg"); c.style.setProperty("--rx", ((.5 - y) * 9).toFixed(2) + "deg");
+    });
+    c.addEventListener("pointerleave", function () { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); });
+  });
+})();
+(function () {
+  var m = document.querySelector(".lmail"); if (!m) return;
+  var b = m.querySelector(".copy");
+  m.addEventListener("click", function (e) { if (e.target !== b) b.click(); });
+  m.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); b.click(); } });
+  b.addEventListener("click", function () { m.classList.add("ok"); setTimeout(function () { m.classList.remove("ok"); }, 1800); });
+})();
+</script>
 </body></html>
