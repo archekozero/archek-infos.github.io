@@ -616,7 +616,8 @@ const S1 = (() => {
     const portrait = camera.aspect < 1;
     const fov = portrait ? 66 : 55; if (camera.fov !== fov) { camera.fov = fov; camera.updateProjectionMatrix(); }
     const tp = clamp(t / 0.84); // 84 % du défilement pour les écrans, la fin pour la machine
-    const u = tp * (L - 1), i0 = Math.min(L - 2, Math.floor(u)), f = u - i0;
+    const PAD = 0.4; // même temps d'arrêt sur le premier et le dernier écran
+    const u = clamp(tp * (L - 1 + 2 * PAD) - PAD, 0, L - 1), i0 = Math.min(L - 2, Math.floor(u)), f = u - i0;
     const fs = ss(0.3, 0.7, f); // pause sur chaque écran
     viewPoint(i0, tmpA, look); viewPoint(i0 + 1, tmpB, view);
     const lookTo = look.clone().lerp(view, fs);
