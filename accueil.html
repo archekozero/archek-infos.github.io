@@ -1,0 +1,929 @@
+<!doctype html><html lang="fr" data-da-page="Accueil"><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=JetBrains+Mono:wght@400;600&family=Pixelify+Sans:wght@500;700&display=swap"><style id="da-css">/* ===== DA Archek — couche commune (fond étoilé, typo, glitch) ===== */
+:root{
+  --bg:#050507;--fg:#f2efe9;--muted:rgba(242,239,233,.64);--line:rgba(var(--da-acc-rgb),.22);
+  --accent:var(--da-acc);--accent-ink:var(--da-acc);--rose:#ff5a7a;--surface:rgba(8,8,12,.72);
+  --tile:#0b0b0d;--tile-dot:#1c1c20;--glass:rgba(8,8,12,.72);
+  --font-display:"Anton",Impact,sans-serif;--font-body:"JetBrains Mono",ui-monospace,monospace;--font-mono:"JetBrains Mono",ui-monospace,monospace;
+  --da-acc:#ff2d4a;--da-acc-rgb:255,45,74;--da-fg:#f2efe9;
+  color-scheme:dark;
+}
+html{background:radial-gradient(ellipse 90% 60% at 50% -10%,rgba(var(--da-acc-rgb),.10),transparent 70%),#07070b !important;background-attachment:fixed !important}
+body{background:transparent !important;color:var(--da-fg) !important;font-family:"JetBrains Mono",ui-monospace,monospace !important;font-size:14px;line-height:1.75;-webkit-font-smoothing:antialiased;padding-bottom:70px !important}
+::selection{background:var(--da-acc);color:#000}
+#sky{display:none !important}
+#da-stars{position:fixed;inset:0;width:100vw;height:100vh;z-index:-1;pointer-events:none;display:block}
+#da-vig{position:fixed;inset:0;z-index:9990;pointer-events:none;background:radial-gradient(ellipse at center,transparent 62%,rgba(0,0,0,.4) 100%)}
+#da-scan{position:fixed;inset:0;z-index:9991;pointer-events:none;background:repeating-linear-gradient(0deg,rgba(0,0,0,.07) 0 1px,transparent 1px 3px)}
+
+/* ---- typographie ---- */
+h1{font-family:"Anton",Impact,sans-serif !important;font-weight:400 !important;text-transform:uppercase;letter-spacing:.01em !important;line-height:.92 !important;
+  font-size:clamp(54px,13vw,128px) !important;color:transparent !important;-webkit-text-fill-color:transparent !important;background:none !important;-webkit-text-stroke:1.2px var(--da-fg);filter:drop-shadow(0 0 18px rgba(var(--da-acc-rgb),.35));position:relative}
+h1.da-glitch,h1:hover{animation:da-gl .45s steps(2) 1}
+@keyframes da-gl{0%{text-shadow:2px 0 rgba(var(--da-acc-rgb),.8),-2px 0 rgba(255,255,255,.5);transform:translateX(-2px)}
+  33%{text-shadow:-3px 0 rgba(var(--da-acc-rgb),.8),3px 0 rgba(255,255,255,.5);transform:translateX(2px) skewX(-2deg)}
+  66%{text-shadow:1px 0 rgba(var(--da-acc-rgb),.8),-1px 0 rgba(255,255,255,.5);transform:none}100%{text-shadow:none}}
+h2{font-family:"Anton",Impact,sans-serif !important;font-weight:400 !important;text-transform:uppercase;letter-spacing:.03em !important;font-size:clamp(26px,5vw,38px) !important;color:var(--da-fg) !important;line-height:1.05}
+h2::before{content:"//" !important;width:auto !important;height:auto !important;background:none !important;box-shadow:none !important;border:0 !important;
+  font:600 13px "JetBrains Mono",monospace !important;color:var(--da-acc) !important;letter-spacing:.1em;margin-right:4px;align-self:center}
+h3{font-family:"Anton",Impact,sans-serif !important;font-weight:400 !important;text-transform:uppercase;letter-spacing:.04em !important;color:var(--da-fg) !important}
+p,li,dd,figcaption,blockquote{color:var(--muted)}
+p strong,p b,li strong{color:var(--da-fg) !important}
+.label,.st,.n,.src,small,cite,.chip,.badge,.legend li{font-family:"JetBrains Mono",monospace !important;text-transform:uppercase;letter-spacing:.16em !important;font-size:11px !important}
+.label{color:var(--da-acc) !important}
+.lead,.bio{color:rgba(242,239,233,.82) !important;font-size:15px !important}
+
+/* ---- liens & boutons ---- */
+a{color:var(--da-fg);text-decoration:none;border-bottom:1px solid rgba(var(--da-acc-rgb),.55);transition:color .2s,background .2s}
+a:hover{color:var(--da-acc)}
+.lcard,.ct,.topnav a,.dlbtn,.btn{border-bottom-width:1px}
+.btn,.dlbtn,button:not(.da-keep){border-radius:6px !important;background:transparent !important;border:1px solid rgba(var(--da-acc-rgb),.7) !important;color:var(--da-fg) !important;
+  font-family:"JetBrains Mono",monospace !important;text-transform:uppercase;letter-spacing:.14em;font-size:12px !important;box-shadow:none !important}
+.btn:hover,.dlbtn:hover,button:not(.da-keep):hover{background:var(--da-acc) !important;color:#07070b !important;box-shadow:0 0 24px rgba(var(--da-acc-rgb),.45) !important}
+
+/* ---- blocs : angles droits, fonds noirs ---- */
+.card,.uc,.art,.chip,.badge,.price,.insp,.ct,.dl,.lcard,.pcard,.fcard,details,.quote,.bubble,figure,.tile,.grid>div,.links>a,.talk>a{
+  border-radius:8px !important;border-color:var(--line) !important;backdrop-filter:none !important;-webkit-backdrop-filter:none !important}
+.card,.uc,.price,.insp,.ct,.dl,.lcard,details,.quote,.bubble{background:rgba(12,12,18,.66) !important}
+.uc:hover,.lcard:hover,.ct:hover{border-color:var(--da-acc) !important;box-shadow:0 0 28px rgba(var(--da-acc-rgb),.18) !important}
+.art{background-image:radial-gradient(rgba(242,239,233,.08) 1px,transparent 1px) !important;box-shadow:inset 0 0 80px rgba(var(--da-acc-rgb),.12) !important}
+.chip{background:transparent !important;border:1px solid var(--line) !important;color:var(--muted) !important}
+.chip b{color:var(--da-fg) !important}
+.badge{border-color:var(--da-acc) !important;color:var(--da-acc) !important}
+.steps{border-left-color:rgba(var(--da-acc-rgb),.35) !important}
+.steps li::before{border-color:var(--da-acc) !important;border-radius:0 !important}
+.steps li.now::before,.steps li.done::before{background:var(--da-acc) !important;box-shadow:0 0 14px var(--da-acc) !important}
+img,video{border-radius:0 !important}
+hr{border-color:var(--line)}
+
+/* ---- navigation ---- */
+.topnav{background:rgba(5,5,7,.82) !important;backdrop-filter:none !important;border-radius:0 !important;border-color:var(--line) !important}
+.topnav a{font-family:"JetBrains Mono",monospace !important;text-transform:uppercase;letter-spacing:.14em;font-size:11px !important;border-bottom:0;color:var(--muted) !important;border-radius:0 !important;background:none !important}
+.topnav a[aria-current],.topnav a:hover{color:var(--da-fg) !important;border-color:rgba(var(--da-acc-rgb),.6) !important}
+.topnav a[aria-current]::before{content:"▶ ";color:var(--da-acc)}
+
+/* ---- HUD (bas d'écran) ---- */
+#da-hud{position:fixed;left:0;right:0;bottom:0;z-index:9992;pointer-events:none;display:flex;justify-content:space-between;align-items:flex-end;
+  padding:14px 18px;font:11px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:rgba(242,239,233,.55);
+  background:linear-gradient(transparent,rgba(5,5,7,.85) 60%)}
+#da-hud b{font-family:"Anton",sans-serif;font-weight:400;font-size:13px;letter-spacing:.08em;color:var(--da-fg);margin-right:8px}
+#da-hud .bar{width:120px;height:2px;background:rgba(255,255,255,.15);margin-top:7px;position:relative}
+#da-hud .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--da-acc)}
+#da-hud .hint{animation:da-blink 1.4s steps(2) infinite}
+@keyframes da-blink{50%{opacity:.25}}
+
+/* ---- chargement & transitions ---- */
+#da-load{position:fixed;inset:0;z-index:10000;background:#050507;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;transition:opacity .6s}
+#da-load .lt{font:22px "Anton",sans-serif;letter-spacing:.14em;color:#f2efe9}
+#da-load .bar{width:120px;height:2px;background:rgba(255,255,255,.15);position:relative}
+#da-load .bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:#f2efe9;transition:width .8s linear}
+#da-load .pct{font:10px "JetBrains Mono",monospace;color:rgba(242,239,233,.55);letter-spacing:.2em}
+#da-load.out{opacity:0;pointer-events:none}
+#da-gl{position:fixed;inset:0;z-index:9995;pointer-events:none}
+#da-gl div{position:absolute;left:0;right:0;mix-blend-mode:screen}
+#da-fade{position:fixed;inset:0;z-index:9994;background:#000;opacity:0;pointer-events:none;transition:opacity .28s}
+@media (prefers-reduced-motion:reduce){h1:hover,h1.da-glitch{animation:none}#da-hud .hint{animation:none}}
+:root{--da-acc:rgb(169,196,255);--da-acc-rgb:169,196,255}#faq .section-head{flex-direction:column !important;align-items:center !important;text-align:center;gap:6px !important;border:0 !important}#faq .section-head h2{justify-content:center}.faq{max-width:760px;margin:24px auto 0 !important;border-top:0 !important;display:flex;flex-direction:column;gap:12px}.faq details{border:1px solid var(--line) !important;padding:0 26px !important}.faq summary{padding:20px 0 !important;gap:20px !important;font-family:"JetBrains Mono",monospace !important;font-size:16px !important;font-weight:600 !important}.faq details p{max-width:none !important;margin:0 0 22px !important;padding-top:14px;border-top:1px solid var(--line);font-size:14px !important;line-height:1.8}.faq details[open]{border-color:rgba(var(--da-acc-rgb),.5) !important}</style></head><body>
+<title>Mes liens et projets</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root {
+  --bg: #050507;
+  --surface: rgba(10, 12, 17, 0.8);
+  --fg: #ECEFF4;
+  --muted: #98A2B0;
+  --line: #242934;
+  --accent: #A9C4FF;
+  --accent-ink: #A9C4FF;
+  --tile: #0B0B0D;
+  --tile-dot: #1C1C20;
+  --font-display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+  --font-body: "Hanken Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
+  color-scheme: dark;
+}
+#sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; display: block; }
+* { box-sizing: border-box; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.55;
+  padding-left: max(16px, env(safe-area-inset-left, 0px));
+  padding-right: max(16px, env(safe-area-inset-right, 0px));
+  padding-block: 48px 40px;
+}
+.wrap { position: relative; z-index: 1; max-width: 720px; margin: 0 auto; display: flex; flex-direction: column; gap: 56px; }
+a { color: inherit; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent-ink); outline-offset: 3px; border-radius: 4px; }
+.label { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+header { display: flex; flex-direction: column; gap: 18px; }
+h1 { font-family: var(--font-display); font-weight: 700; font-size: clamp(44px, 11vw, 84px); line-height: 0.98; letter-spacing: -0.03em; margin: 0; text-wrap: balance; }
+.bio { max-width: 52ch; margin: 0; font-size: 19px; color: var(--muted); }
+.bio strong { color: var(--fg); font-weight: 600; }
+h2 { font-family: var(--font-display); font-weight: 700; font-size: 28px; letter-spacing: -0.02em; margin: 0; text-wrap: balance; }
+.section-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+.contacts { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.contacts li { border-bottom: 1px solid var(--line); }
+.row, .copy-row { display: grid; grid-template-columns: 112px minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 18px 4px; }
+.row { text-decoration: none; transition: background-color 0.15s, padding-left 0.15s; }
+.row .name, .copy-row .name { font-family: var(--font-display); font-weight: 500; font-size: 20px; }
+.row .handle { font-family: var(--font-mono); font-size: 14px; color: var(--muted); overflow-wrap: anywhere; }
+.copy-row .handle { font-family: var(--font-mono); font-size: 14px; color: var(--fg); overflow-wrap: anywhere; user-select: all; }
+.row .go { font-family: var(--font-mono); font-size: 18px; color: var(--accent-ink); transition: transform 0.15s; }
+a.row:hover { background: var(--surface); padding-left: 12px; }
+a.row:hover .go { transform: translateX(4px); }
+.copy { font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; background: transparent; color: var(--fg); border: 1px solid var(--fg); border-radius: 999px; padding: 7px 14px; cursor: pointer; transition: background-color 0.15s, color 0.15s; }
+.copy:hover { background: var(--fg); color: var(--bg); }
+.project { display: grid; grid-template-columns: 220px minmax(0, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+.screen { background-color: var(--tile); background-image: radial-gradient(var(--tile-dot) 1px, transparent 1px); background-size: 16px 16px; display: flex; align-items: flex-end; justify-content: center; padding: 28px 16px 20px; min-height: 260px; }
+.sprite { width: 128px; max-width: 100%; height: auto; image-rendering: pixelated; animation: bob 1.2s steps(2, jump-none) infinite alternate; }
+@keyframes bob { from { transform: translateY(0); } to { transform: translateY(-6px); } }
+.project-body { padding: 26px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+.project h3 { font-family: var(--font-display); font-weight: 700; font-size: 30px; letter-spacing: -0.02em; margin: 0; }
+.project p { margin: 0; color: var(--muted); font-size: 17px; max-width: 46ch; }
+.tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: auto; padding-top: 8px; }
+.tag { font-family: var(--font-mono); font-size: 12px; border: 1px solid var(--line); border-radius: 999px; padding: 3px 10px; color: var(--muted); }
+.project {
+  --rose: #f08ab8;
+  --glow: var(--near, 0);
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  border-color: var(--line);
+  border-color: color-mix(in srgb, var(--rose) calc(var(--glow) * 100%), var(--line));
+  box-shadow: 0 0 calc(44px * var(--glow)) calc(2px * var(--glow)) rgba(240, 138, 184, calc(0.4 * var(--glow)));
+  transition: box-shadow 0.15s linear, border-color 0.15s linear;
+}
+.project:hover, .project:focus-visible { --glow: 1; }
+.project:focus-visible { outline: 2px solid var(--rose); outline-offset: 4px; }
+.screen { box-shadow: inset 0 0 calc(80px * var(--glow)) rgba(240, 138, 184, calc(0.5 * var(--glow))); transition: box-shadow 0.15s linear; }
+.sprite { filter: drop-shadow(0 0 calc(18px * var(--glow)) rgba(240, 138, 184, calc(0.95 * var(--glow)))); transition: filter 0.15s linear; }
+.see { font-family: var(--font-mono); font-size: 13px; color: var(--rose); }
+.project:hover .see { text-decoration: underline; }
+.future { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+.future li { display: grid; grid-template-columns: 112px minmax(0, 1fr); column-gap: 12px; row-gap: 2px; padding: 18px 4px; border-bottom: 1px solid var(--line); }
+.future .label { grid-row: 1 / span 2; padding-top: 7px; }
+.future h3 { font-family: var(--font-display); font-weight: 500; font-size: 22px; margin: 0; }
+.future h3 a { text-decoration: none; }
+.future h3 a:hover { color: var(--accent-ink); }
+.future p { margin: 0; color: var(--muted); font-size: 16px; max-width: 52ch; }
+.future .idea { display: inline-block; margin-top: 4px; font-family: var(--font-mono); font-size: 13px; color: var(--accent-ink); }
+.future li:last-child .label { color: var(--accent-ink); }
+footer { display: flex; flex-direction: column; gap: 28px; border-top: 1px solid var(--line); padding-top: 28px; }
+.fcols { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px 24px; }
+.fcol { display: flex; flex-direction: column; gap: 10px; }
+.fh { font-family: var(--font-mono); font-weight: 500; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--fg); margin: 0 0 4px; }
+.fcol a { font-size: 16px; color: var(--muted); text-decoration: none; width: fit-content; transition: color .15s; }
+.fcol a:hover, .fcol a:focus-visible { color: var(--accent-ink); text-decoration: underline; text-underline-offset: 4px; }
+.fbase { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding-top: 18px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+@media (max-width: 560px) { .fcols { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 560px) {
+  body { padding-block: 32px 28px; font-size: 16px; }
+  .row, .copy-row { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; }
+  .row .name, .copy-row .name { grid-column: 1; }
+  .row .handle, .copy-row .handle { grid-column: 1; grid-row: 2; }
+  .row .go, .copy-row .copy { grid-column: 2; grid-row: 1 / span 2; }
+  .project { grid-template-columns: minmax(0, 1fr); }
+  .future li { grid-template-columns: minmax(0, 1fr); }
+  .future .label { grid-row: auto; padding-top: 0; }
+  .screen { min-height: 220px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; }
+  .sprite { animation: none; }
+}
+
+.fcards { display: flex; flex-direction: column; gap: 16px; }
+.fcard { display: grid; grid-template-columns: 160px minmax(0, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; text-decoration: none; color: inherit; transition: box-shadow 0.15s, border-color 0.15s; }
+.fcard:hover, .fcard:focus-visible { border-color: var(--c); box-shadow: 0 0 36px 1px rgba(var(--cr), 0.35); }
+.fcard:focus-visible { outline: 2px solid var(--c); outline-offset: 4px; }
+.fscreen { background-color: var(--tile); background-image: radial-gradient(rgba(var(--cr), 0.28), transparent 75%), radial-gradient(var(--tile-dot) 1px, transparent 1px); background-size: auto, 16px 16px; display: flex; align-items: flex-end; justify-content: center; padding: 22px 12px 16px; min-height: 150px; }
+.fimg { width: 96px; max-width: 100%; height: auto; image-rendering: pixelated; animation: bob 1.2s steps(2, jump-none) infinite alternate; }
+.fbody { padding: 20px 22px; display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+.fbody h3 { font-family: var(--font-display); font-weight: 700; font-size: 24px; letter-spacing: -0.02em; margin: 0; }
+.fbody p { margin: 0; color: var(--muted); font-size: 16px; max-width: 46ch; }
+.fbody .label { color: var(--c); }
+.fsee { font-family: var(--font-mono); font-size: 13px; color: var(--c); margin-top: auto; padding-top: 6px; }
+.fcard:hover .fsee { text-decoration: underline; }
+@media (max-width: 560px) { .fcard { grid-template-columns: minmax(0, 1fr); } .fscreen { min-height: 140px; } }
+@media (prefers-reduced-motion: reduce) { .fimg { animation: none; } }
+.row .name,.copy-row .name{display:flex;align-items:center;gap:12px}.ico{flex:none;image-rendering:pixelated}a.row:hover .ico{transform:scale(1.12)}.ico{transition:transform .15s}
+.conv{display:flex;flex-direction:column;gap:4px;padding:22px 24px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;transition:border-color .15s,box-shadow .15s}.conv strong{font-family:var(--font-display);font-size:28px;letter-spacing:-.02em}.conv span:last-child{color:#B48CFF;font-size:16px}.conv:hover{border-color:#B48CFF;box-shadow:0 0 36px 1px rgba(180,140,255,.35)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}.chip{font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;border:1px solid var(--line);border-radius:999px;padding:5px 12px;color:var(--muted);background:var(--surface)}
+.par span:last-child{color:#4FE3C1}.par:hover{border-color:#4FE3C1;box-shadow:0 0 36px 1px rgba(79,227,193,.35)}
+
+/* ---- liens v2 ---- */
+@property --ang{syntax:"<angle>";inherits:false;initial-value:0deg}
+h1{background:linear-gradient(100deg,#ECEFF4 0%,#ECEFF4 35%,#f6b8d4 50%,#A9C4FF 62%,#ECEFF4 78%);background-size:250% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;animation:shine 7s ease-in-out infinite alternate}
+@keyframes shine{from{background-position:100% 0}to{background-position:0 0}}
+.links{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.lcard{--rx:0deg;--ry:0deg;--ty:0px;--mx:50%;--my:50%;position:relative;isolation:isolate;display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:14px;padding:16px 18px;min-height:84px;border-radius:16px;background-color:var(--tile);background-image:radial-gradient(circle at 88% 0%,rgba(var(--cr),.16),transparent 62%),radial-gradient(var(--tile-dot) 1px,transparent 1px);background-size:auto,16px 16px;border:1px solid var(--line);text-decoration:none;color:inherit;cursor:pointer;overflow:hidden;transform:perspective(800px) rotateX(var(--rx)) rotateY(var(--ry)) translateY(var(--ty));transition:transform .25s cubic-bezier(.2,.8,.2,1),border-color .25s,box-shadow .3s}
+.lcard::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(260px circle at var(--mx) var(--my),rgba(var(--cr),.22),transparent 65%);opacity:0;transition:opacity .25s}
+.lcard::after{content:"";position:absolute;inset:0;border-radius:inherit;padding:1.5px;z-index:-1;background:conic-gradient(from var(--ang),transparent 0 55%,var(--c) 80%,transparent 100%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box exclude,linear-gradient(#000 0 0);opacity:0;transition:opacity .3s}
+.lcard:hover,.lcard:focus-visible{--ty:-4px;border-color:rgba(var(--cr),.45);box-shadow:0 18px 44px -14px rgba(var(--cr),.45),0 0 0 1px rgba(var(--cr),.12)}
+.lcard:hover::before,.lcard:focus-visible::before{opacity:1}
+.lcard:hover::after,.lcard:focus-visible::after{opacity:1;animation:spin 2.6s linear infinite}
+.lcard:focus-visible{outline:2px solid var(--c);outline-offset:3px}
+@keyframes spin{to{--ang:360deg}}
+.licon{display:grid;place-items:center;width:48px;height:48px;border-radius:10px;background:rgba(5,5,7,.55);border:1px solid rgba(var(--cr),.3);box-shadow:0 0 18px -4px rgba(var(--cr),.5);transition:border-color .25s,transform .3s cubic-bezier(.3,1.6,.5,1)}
+.lcard:hover .licon{border-color:rgba(var(--cr),.6);transform:rotate(-6deg) scale(1.08)}
+.lcard .ico{width:24px;height:24px}
+a.row:hover .ico{transform:none}
+.ltxt{display:flex;flex-direction:column;min-width:0;line-height:1.25}
+.lname{font-family:var(--font-display);font-weight:700;font-size:22px;letter-spacing:-.01em}
+.lhandle{font-family:var(--font-mono);font-size:13px;color:var(--c);overflow-wrap:anywhere;margin-top:2px}
+.lsub{font-size:14px;color:var(--muted);margin-top:4px;max-height:0;opacity:0;overflow:hidden;transition:max-height .3s,opacity .3s}
+.lcard:hover .lsub,.lcard:focus-visible .lsub{max-height:48px;opacity:1}
+.larrow{font-family:var(--font-mono);font-size:22px;color:var(--c);opacity:.55;transition:transform .3s cubic-bezier(.2,.8,.2,1),opacity .2s}
+.lcard:hover .larrow{transform:translate(4px,-4px);opacity:1}
+.lmail{grid-template-columns:auto minmax(0,1fr)}.lmail .lhandle{overflow-wrap:anywhere;font-size:12.5px}.lmail .copy{grid-column:2;justify-self:start;margin-top:2px}.lmail .lsub{max-height:48px;opacity:1}
+.lmail .copy{border-color:var(--c);color:var(--c);position:relative;z-index:1}
+.lmail .copy:hover{background:var(--c);color:#050507}
+.lmail.ok{border-color:var(--c);box-shadow:0 0 40px -6px rgba(var(--cr),.6)}
+@media (hover:none){.lsub{max-height:48px;opacity:1}}
+@media (max-width:560px){.links{grid-template-columns:minmax(0,1fr)}.lcard{padding:16px;gap:14px;min-height:92px}.licon{width:44px;height:44px}}
+@keyframes rise{from{opacity:0;transform:translateY(26px) scale(.97)}}
+.js .reveal{opacity:0}
+.js .reveal.in{opacity:1;animation:rise .75s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*90ms)}
+@media (prefers-reduced-motion:reduce){h1{animation:none}.js .reveal,.js .reveal.in{opacity:1;animation:none}.lcard,.lcard *{transition:none!important;animation:none!important}.lcard{transform:none}}
+
+/* ---- navigation + telechargement + faq ---- */
+body{--gut:max(16px,env(safe-area-inset-left,0px));padding-top:0}
+html{scroll-padding-top:72px;scroll-behavior:smooth}
+.topnav{position:sticky;top:0;z-index:10;display:flex;flex-wrap:nowrap;gap:8px;align-items:center;
+  margin:0 calc(-1*var(--gut)) 44px;
+  padding:14px calc(var(--gut) + max(0px,(100% - 720px)/2));
+  padding-top:max(14px,env(safe-area-inset-top,0px));
+  background:linear-gradient(to bottom,rgba(5,5,7,.92),rgba(5,5,7,.6));
+  -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+  border-bottom:1px solid transparent;
+  overflow-x:auto;overscroll-behavior-x:contain;scrollbar-width:none;
+  transition:border-color .25s}
+.topnav::-webkit-scrollbar{display:none}
+.topnav.stuck{border-bottom-color:var(--line)}
+.topnav a{flex:none;white-space:nowrap;font-family:var(--font-mono);font-size:12px;letter-spacing:.06em;text-decoration:none;border:1px solid var(--line);border-radius:999px;padding:6px 13px;color:var(--muted);background:var(--surface);transition:color .15s,border-color .15s}
+.topnav a:hover,.topnav a:focus-visible{color:var(--fg);border-color:var(--accent)}
+.topnav a[aria-current]{color:var(--fg);border-color:var(--fg)}
+.dl{--c:#f08ab8;--cr:240,138,184;display:flex;flex-direction:column;gap:14px;padding:24px;border:1px solid rgba(var(--cr),.35);border-radius:12px;background-color:var(--tile);background-image:radial-gradient(circle at 90% 0%,rgba(var(--cr),.18),transparent 60%),radial-gradient(var(--tile-dot) 1px,transparent 1px);background-size:auto,16px 16px;box-shadow:0 0 44px -12px rgba(var(--cr),.45)}
+.dl p{margin:0;color:var(--muted)}
+.dlbtn{align-self:flex-start;display:inline-block;background:var(--c);color:#1a0a12;text-decoration:none;font-family:var(--font-display);font-weight:700;font-size:20px;padding:14px 26px;border-radius:12px;box-shadow:0 0 28px -4px rgba(var(--cr),.7);transition:transform .15s,box-shadow .2s}
+.dlbtn:hover,.dlbtn:focus-visible{transform:translateY(-2px);box-shadow:0 0 40px 0 rgba(var(--cr),.9)}
+.dlnote{font-size:15px}.dlnote a,.faq a{color:var(--accent-ink)}
+.dlnext{display:flex;flex-wrap:wrap;gap:8px 18px;padding-top:12px;border-top:1px solid var(--line);font-family:var(--font-mono);font-size:13px}
+.dlnext a{color:var(--c);text-decoration:none}.dlnext a:hover{text-decoration:underline}
+.faq{border-top:1px solid var(--line)}
+.faq details{border-bottom:1px solid var(--line);padding:4px}
+.faq summary{cursor:pointer;list-style:none;display:flex;justify-content:space-between;gap:12px;padding:16px 0;font-family:var(--font-display);font-weight:500;font-size:20px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-family:var(--font-mono);color:var(--accent-ink)}
+.faq details[open] summary::after{content:"\2212"}
+.faq details p{margin:0 0 16px;color:var(--muted);font-size:16px;max-width:56ch}
+.faq summary:focus-visible{outline:2px solid var(--accent-ink);outline-offset:2px}
+</style>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+
+<nav class="topnav" aria-label="Navigation du site">
+  <a href="https://archekozero.github.io/archek-infos.github.io/accueil.html" aria-current="page">Accueil</a><a href="#beta">Bêta testeur</a><a href="https://archekozero.github.io/archek-infos-rose.github.io/">Rose</a><a href="https://archekozero.github.io/archek-cyberdeck/">Cyberdeck</a><a href="https://archekozero.github.io/archek-cle/">Rose sous clé</a><a href="https://archekozero.github.io/archek-ia/">Une vraie IA</a><a href="https://archekozero.github.io/parcours/">Parcours</a><a href="https://archekozero.github.io/archek-conviction/">Convictions</a>
+</nav>
+<div class="wrap">
+  <header>
+    <span class="label">Liens et projets</span>
+    <h1>Archek</h1>
+    <p class="bio">Je m'appelle <strong>Archek</strong>, je suis étudiant ingénieur en informatique et je développe <strong>Rose</strong> pour votre plaisir.</p>
+    <div class="chips"><span class="chip">Étudiant ingénieur</span><span class="chip">IA vocale</span><span class="chip">Matériel &amp; fabrication</span><span class="chip">Gratuit &amp; pour tous</span></div>
+  </header>
+
+  <section id="beta" aria-labelledby="dl-title">
+    <div class="section-head">
+      <h2 id="dl-title">Deviens bêta testeur</h2>
+      <span class="label">Bêta fermée · Windows 10 et 11</span>
+    </div>
+    <div class="dl">
+      <p>Rose n’est pas encore disponible pour tout le monde. Je cherche des premiers testeurs pour l’essayer, me dire ce qui marche, ce qui bug et ce que tu aimerais qu’elle sache faire.</p>
+      <a class="dlbtn" href="https://discord.gg/nECr5YgWav" target="_blank" rel="noopener">Rejoindre la bêta sur Discord</a>
+      <p class="dlnote">Rejoins le serveur et dis que tu veux tester : je préviens les premiers testeurs dès que la bêta s’ouvre. Des questions ? <a href="#faq">Lis la FAQ</a>.</p>
+      <div class="dlnext"><a href="https://www.instagram.com/rose_ai_01/" target="_blank" rel="noopener">Les actus sur Instagram →</a><a href="https://archekozero.github.io/archek-infos-rose.github.io/">Voir l’évolution de Rose →</a><a href="https://archekozero.github.io/archek-cle/">Bientôt : Rose sous clé →</a><a href="https://archekozero.github.io/archek-cyberdeck/">Le cyberdeck →</a><a href="https://archekozero.github.io/archek-ia/">Vers une vraie IA →</a></div>
+    </div>
+  </section>
+
+  <section aria-labelledby="contact-title">
+    <div class="section-head">
+      <h2 id="contact-title">Me retrouver</h2>
+      <span class="label">4 façons de me joindre</span>
+    </div>
+    <div class="links">
+      <a class="lcard" style="--c:#f08ab8;--cr:240,138,184;--i:0" href="https://www.instagram.com/rose_ai_01/" target="_blank" rel="noopener">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 11" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #f08ab866)"><rect x="1" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="2" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="9" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="10" y="0" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="1" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="1" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="2" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="2" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="2" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="3" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="4" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="5" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="6" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="7" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="8" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="8" width="1" height="1" style="fill:#f08ab8"/><rect x="0" y="9" width="1" height="1" style="fill:#f08ab8"/><rect x="11" y="9" width="1" height="1" style="fill:#f08ab8"/><rect x="1" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="2" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="3" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="4" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="5" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="6" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="7" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="8" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="9" y="10" width="1" height="1" style="fill:#f08ab8"/><rect x="10" y="10" width="1" height="1" style="fill:#f08ab8"/></svg></span>
+        <span class="ltxt"><span class="lname">Instagram</span><span class="lhandle">rose_ai_01</span><span class="lsub">Coulisses &amp; actus de Rose</span></span>
+        <span class="larrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="lcard" style="--c:#7FA2FF;--cr:127,162,255;--i:1" href="https://fr.linkedin.com/in/reihane-bodart-4313a9407" target="_blank" rel="noopener">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 12" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #7FA2FF66)"><rect x="1" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="0" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="1" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="2" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="2" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="3" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="6" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="7" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="8" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="4" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="5" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="6" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="6" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="6" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="6" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="7" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="7" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="7" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="7" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="8" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="8" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="8" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="8" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="9" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="9" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="9" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="9" width="1" height="1" style="fill:#7FA2FF"/><rect x="0" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="11" y="10" width="1" height="1" style="fill:#7FA2FF"/><rect x="1" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="2" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="3" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="4" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="5" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="6" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="7" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="8" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="9" y="11" width="1" height="1" style="fill:#7FA2FF"/><rect x="10" y="11" width="1" height="1" style="fill:#7FA2FF"/></svg></span>
+        <span class="ltxt"><span class="lname">LinkedIn</span><span class="lhandle">Reihane Bodart</span><span class="lsub">Parcours &amp; réseau pro</span></span>
+        <span class="larrow" aria-hidden="true">↗</span>
+      </a>
+      <a class="lcard" style="--c:#A9A6FF;--cr:169,166,255;--i:2" href="https://discord.gg/nECr5YgWav" target="_blank" rel="noopener">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 10" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #A9A6FF66)"><rect x="2" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="0" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="1" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="2" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="3" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="4" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="10" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="4" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="4" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="5" width="1" height="1" style="fill:var(--bg)"/><rect x="10" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="5" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="6" width="1" height="1" style="fill:#A9A6FF"/><rect x="0" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="5" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="6" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="11" y="7" width="1" height="1" style="fill:#A9A6FF"/><rect x="1" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="4" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="7" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="10" y="8" width="1" height="1" style="fill:#A9A6FF"/><rect x="2" y="9" width="1" height="1" style="fill:#A9A6FF"/><rect x="3" y="9" width="1" height="1" style="fill:#A9A6FF"/><rect x="8" y="9" width="1" height="1" style="fill:#A9A6FF"/><rect x="9" y="9" width="1" height="1" style="fill:#A9A6FF"/></svg></span>
+        <span class="ltxt"><span class="lname">Discord</span><span class="lhandle">Serveur de connaissances</span><span class="lsub">Viens discuter avec nous</span></span>
+        <span class="larrow" aria-hidden="true">↗</span>
+      </a>
+      <div class="lcard lmail" style="--c:#FFD27F;--cr:255,210,127;--i:3" tabindex="0" role="group" aria-label="E-mail">
+        <span class="licon"><svg class="ico" width="26" height="26" viewBox="0 0 12 8" shape-rendering="crispEdges" aria-hidden="true" style="filter:drop-shadow(0 0 6px #FFD27F66)"><rect x="0" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="0" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="1" width="1" height="1" style="fill:var(--bg)"/><rect x="2" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="1" width="1" height="1" style="fill:var(--bg)"/><rect x="11" y="1" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="2" width="1" height="1" style="fill:var(--bg)"/><rect x="3" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="2" width="1" height="1" style="fill:var(--bg)"/><rect x="10" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="2" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="3" width="1" height="1" style="fill:var(--bg)"/><rect x="4" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="3" width="1" height="1" style="fill:var(--bg)"/><rect x="9" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="3" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="5" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="6" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="7" y="4" width="1" height="1" style="fill:var(--bg)"/><rect x="8" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="4" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="5" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="6" width="1" height="1" style="fill:#FFD27F"/><rect x="0" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="1" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="2" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="3" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="4" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="5" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="6" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="7" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="8" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="9" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="10" y="7" width="1" height="1" style="fill:#FFD27F"/><rect x="11" y="7" width="1" height="1" style="fill:#FFD27F"/></svg></span>
+        <span class="ltxt"><span class="lname">E-mail</span><span class="lhandle" id="mail-address">reihane.bodart.01@gmail.com</span><span class="lsub">Clique pour copier l'adresse</span></span>
+        <button class="copy" type="button" data-target="mail-address" aria-live="polite">Copier</button>
+      </div>
+    </div>
+  </section>
+
+  <section aria-labelledby="projects-title">
+    <div class="section-head">
+      <h2 id="projects-title">Projets</h2>
+      <span class="label">En cours</span>
+    </div>
+    <a class="project" href="https://archekozero.github.io/archek-infos-rose.github.io/">
+      <div class="screen">
+        <img class="sprite" alt="Rose, un petit personnage en pixel art aux cheveux orange et au pull rose" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABgCAYAAACtxXToAAACk0lEQVR42u2cMUjDQBSGL1GkYGNQHCoKASdL3Ry0kyAiOjiJk5Ozbo46dtRNZycnEQcHi6jQqXYoLkqdxEwKCqKpKAWpU4ac9eLxcjlr/rell97lvrz/3XvXNIZt20yn5bL55nWtbOga32QJN1P33Z/dOGa5bL4JD0gaAP/uM8aYTi8wdU1e5nOVZsS5CvgT9O98KysW5hhjjMW1MsQC4DcT1wUCHqAjEWoFIu6Jaw2CP01SR0aobRm8rpUN/64XC3NMVzqc+ETIQDEED7AZaoEEW6fqATzPI+X3lmUZ8AAAAIC/GwPCNP65v0Tqv2Nxr6kyRkACAIBM0Fas8Y+Q9hQ1RpDyCEgAABADbKHm6RpnSmOAbIzgYwIkAABJjwGmaYZo/iPiIVNaJ8zHBEgAALAfwBRrHh4AAADQTjGgtHUZOJ5cy2ut96lW2irDAwAAAAj7AVlnJNC+M9CQjBF6Nb5y3xU4rrk38AAAAABBDBjqGyT9ns/HiKmLW+H55xPDwnbZ7/OahwcAAADI1QL8Ojk6Pi7s4PPhRWpA99kLHDc3J8TnHwfPd3ot0oSRB0ACABDvc4J36zkpzfPGn8/3d3v2Dg8AAADQGAM6MvwzRo/wAAAAgH+0J8hbWG1wValI1ftU4/cL+D1MPvfHM0KQAACInxHadnaFX5jv74n2Ck5nxO3TJ1LdHT29CttX3WV4AAAAQIz7AaotTPPwAAAAAFotwOcF5DwgZN1vjB4Gjrsy3aThnOoCagFIAAAIeUDkuT88AAAAoK3/O+yOHShd93mTzQPC1n14AAAAgFwewGvIqS4IY0Lj4S2oYeIFfuuPWBvAAwAAAKJ9mxz1XWFRm+x7hbAKqOw8nU6T3wRXr9eVetgXgBfaVdpW/wMAAAAASUVORK5CYII=">
+      </div>
+      <div class="project-body">
+        <span class="label">Assistante IA vocale</span>
+        <h3>Rose</h3>
+        <p>Rose s'utilise à la voix. Tu lui donnes une commande, elle l'exécute, et elle se balade sur ton bureau sous la forme d'un petit personnage en pixel art.</p>
+        <div class="tags"><span class="tag">IA</span><span class="tag">Commande vocale</span><span class="tag">Pixel art</span><span class="tag">Bureau</span></div>
+        <span class="see">Voir l'évolution de Rose →</span>
+      </div>
+    </a>
+  </section>
+
+  <section aria-labelledby="future-title">
+    <div class="section-head">
+      <h2 id="future-title">Projets futurs</h2>
+      <span class="label">3 étapes prévues</span>
+    </div>
+    <div class="fcards">
+      <a class="fcard" href="https://archekozero.github.io/archek-cyberdeck/" style="--c:#FF5C6C;--cr:255,92,108">
+        <div class="fscreen"><svg class="fimg" viewBox="0 0 22 14" role="img" aria-label="Cyberdeck en pixel art, un petit ordinateur portable rouge" shape-rendering="crispEdges" style="filter:drop-shadow(0 0 18px rgba(255,92,108,.7))"><rect x="3" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="0" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="1" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="1" width="1" height="1" fill="#1A0509"/><rect x="5" y="1" width="1" height="1" fill="#1A0509"/><rect x="6" y="1" width="1" height="1" fill="#1A0509"/><rect x="7" y="1" width="1" height="1" fill="#1A0509"/><rect x="8" y="1" width="1" height="1" fill="#1A0509"/><rect x="9" y="1" width="1" height="1" fill="#1A0509"/><rect x="10" y="1" width="1" height="1" fill="#1A0509"/><rect x="11" y="1" width="1" height="1" fill="#1A0509"/><rect x="12" y="1" width="1" height="1" fill="#1A0509"/><rect x="13" y="1" width="1" height="1" fill="#1A0509"/><rect x="14" y="1" width="1" height="1" fill="#1A0509"/><rect x="15" y="1" width="1" height="1" fill="#1A0509"/><rect x="16" y="1" width="1" height="1" fill="#1A0509"/><rect x="17" y="1" width="1" height="1" fill="#1A0509"/><rect x="18" y="1" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="2" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="2" width="1" height="1" fill="#1A0509"/><rect x="5" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="6" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="7" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="8" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="9" y="2" width="1" height="1" fill="#FF9AA5"/><rect x="10" y="2" width="1" height="1" fill="#1A0509"/><rect x="11" y="2" width="1" height="1" fill="#1A0509"/><rect x="12" y="2" width="1" height="1" fill="#1A0509"/><rect x="13" y="2" width="1" height="1" fill="#1A0509"/><rect x="14" y="2" width="1" height="1" fill="#1A0509"/><rect x="15" y="2" width="1" height="1" fill="#1A0509"/><rect x="16" y="2" width="1" height="1" fill="#1A0509"/><rect x="17" y="2" width="1" height="1" fill="#1A0509"/><rect x="18" y="2" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="3" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="3" width="1" height="1" fill="#1A0509"/><rect x="5" y="3" width="1" height="1" fill="#1A0509"/><rect x="6" y="3" width="1" height="1" fill="#1A0509"/><rect x="7" y="3" width="1" height="1" fill="#1A0509"/><rect x="8" y="3" width="1" height="1" fill="#1A0509"/><rect x="9" y="3" width="1" height="1" fill="#1A0509"/><rect x="10" y="3" width="1" height="1" fill="#1A0509"/><rect x="11" y="3" width="1" height="1" fill="#1A0509"/><rect x="12" y="3" width="1" height="1" fill="#1A0509"/><rect x="13" y="3" width="1" height="1" fill="#1A0509"/><rect x="14" y="3" width="1" height="1" fill="#1A0509"/><rect x="15" y="3" width="1" height="1" fill="#1A0509"/><rect x="16" y="3" width="1" height="1" fill="#1A0509"/><rect x="17" y="3" width="1" height="1" fill="#1A0509"/><rect x="18" y="3" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="4" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="4" width="1" height="1" fill="#1A0509"/><rect x="5" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="6" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="7" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="8" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="9" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="10" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="11" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="12" y="4" width="1" height="1" fill="#FF9AA5"/><rect x="13" y="4" width="1" height="1" fill="#1A0509"/><rect x="14" y="4" width="1" height="1" fill="#1A0509"/><rect x="15" y="4" width="1" height="1" fill="#1A0509"/><rect x="16" y="4" width="1" height="1" fill="#1A0509"/><rect x="17" y="4" width="1" height="1" fill="#1A0509"/><rect x="18" y="4" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="5" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="5" width="1" height="1" fill="#1A0509"/><rect x="5" y="5" width="1" height="1" fill="#1A0509"/><rect x="6" y="5" width="1" height="1" fill="#1A0509"/><rect x="7" y="5" width="1" height="1" fill="#1A0509"/><rect x="8" y="5" width="1" height="1" fill="#1A0509"/><rect x="9" y="5" width="1" height="1" fill="#1A0509"/><rect x="10" y="5" width="1" height="1" fill="#1A0509"/><rect x="11" y="5" width="1" height="1" fill="#1A0509"/><rect x="12" y="5" width="1" height="1" fill="#1A0509"/><rect x="13" y="5" width="1" height="1" fill="#1A0509"/><rect x="14" y="5" width="1" height="1" fill="#1A0509"/><rect x="15" y="5" width="1" height="1" fill="#1A0509"/><rect x="16" y="5" width="1" height="1" fill="#1A0509"/><rect x="17" y="5" width="1" height="1" fill="#1A0509"/><rect x="18" y="5" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="6" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="6" width="1" height="1" fill="#1A0509"/><rect x="5" y="6" width="1" height="1" fill="#FF9AA5"/><rect x="6" y="6" width="1" height="1" fill="#FF9AA5"/><rect x="7" y="6" width="1" height="1" fill="#1A0509"/><rect x="8" y="6" width="1" height="1" fill="#1A0509"/><rect x="9" y="6" width="1" height="1" fill="#1A0509"/><rect x="10" y="6" width="1" height="1" fill="#1A0509"/><rect x="11" y="6" width="1" height="1" fill="#1A0509"/><rect x="12" y="6" width="1" height="1" fill="#1A0509"/><rect x="13" y="6" width="1" height="1" fill="#1A0509"/><rect x="14" y="6" width="1" height="1" fill="#1A0509"/><rect x="15" y="6" width="1" height="1" fill="#1A0509"/><rect x="16" y="6" width="1" height="1" fill="#1A0509"/><rect x="17" y="6" width="1" height="1" fill="#1A0509"/><rect x="18" y="6" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="7" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="7" width="1" height="1" fill="#1A0509"/><rect x="5" y="7" width="1" height="1" fill="#1A0509"/><rect x="6" y="7" width="1" height="1" fill="#1A0509"/><rect x="7" y="7" width="1" height="1" fill="#1A0509"/><rect x="8" y="7" width="1" height="1" fill="#1A0509"/><rect x="9" y="7" width="1" height="1" fill="#1A0509"/><rect x="10" y="7" width="1" height="1" fill="#1A0509"/><rect x="11" y="7" width="1" height="1" fill="#1A0509"/><rect x="12" y="7" width="1" height="1" fill="#1A0509"/><rect x="13" y="7" width="1" height="1" fill="#1A0509"/><rect x="14" y="7" width="1" height="1" fill="#1A0509"/><rect x="15" y="7" width="1" height="1" fill="#1A0509"/><rect x="16" y="7" width="1" height="1" fill="#1A0509"/><rect x="17" y="7" width="1" height="1" fill="#1A0509"/><rect x="18" y="7" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="8" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="19" y="9" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="10" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="10" width="1" height="1" fill="#3A0E15"/><rect x="4" y="10" width="1" height="1" fill="#3A0E15"/><rect x="5" y="10" width="1" height="1" fill="#3A0E15"/><rect x="6" y="10" width="1" height="1" fill="#3A0E15"/><rect x="7" y="10" width="1" height="1" fill="#3A0E15"/><rect x="8" y="10" width="1" height="1" fill="#3A0E15"/><rect x="9" y="10" width="1" height="1" fill="#3A0E15"/><rect x="10" y="10" width="1" height="1" fill="#3A0E15"/><rect x="11" y="10" width="1" height="1" fill="#3A0E15"/><rect x="12" y="10" width="1" height="1" fill="#3A0E15"/><rect x="13" y="10" width="1" height="1" fill="#3A0E15"/><rect x="14" y="10" width="1" height="1" fill="#3A0E15"/><rect x="15" y="10" width="1" height="1" fill="#3A0E15"/><rect x="16" y="10" width="1" height="1" fill="#3A0E15"/><rect x="17" y="10" width="1" height="1" fill="#3A0E15"/><rect x="18" y="10" width="1" height="1" fill="#3A0E15"/><rect x="19" y="10" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="11" width="1" height="1" fill="#3A0E15"/><rect x="4" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="11" width="1" height="1" fill="#3A0E15"/><rect x="6" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="11" width="1" height="1" fill="#3A0E15"/><rect x="8" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="11" width="1" height="1" fill="#3A0E15"/><rect x="10" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="11" width="1" height="1" fill="#3A0E15"/><rect x="12" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="11" width="1" height="1" fill="#3A0E15"/><rect x="14" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="11" width="1" height="1" fill="#3A0E15"/><rect x="16" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="11" width="1" height="1" fill="#3A0E15"/><rect x="18" y="11" width="1" height="1" fill="#3A0E15"/><rect x="19" y="11" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="12" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="12" width="1" height="1" fill="#3A0E15"/><rect x="4" y="12" width="1" height="1" fill="#3A0E15"/><rect x="5" y="12" width="1" height="1" fill="#3A0E15"/><rect x="6" y="12" width="1" height="1" fill="#3A0E15"/><rect x="7" y="12" width="1" height="1" fill="#3A0E15"/><rect x="8" y="12" width="1" height="1" fill="#3A0E15"/><rect x="9" y="12" width="1" height="1" fill="#3A0E15"/><rect x="10" y="12" width="1" height="1" fill="#3A0E15"/><rect x="11" y="12" width="1" height="1" fill="#3A0E15"/><rect x="12" y="12" width="1" height="1" fill="#3A0E15"/><rect x="13" y="12" width="1" height="1" fill="#3A0E15"/><rect x="14" y="12" width="1" height="1" fill="#3A0E15"/><rect x="15" y="12" width="1" height="1" fill="#3A0E15"/><rect x="16" y="12" width="1" height="1" fill="#3A0E15"/><rect x="17" y="12" width="1" height="1" fill="#3A0E15"/><rect x="18" y="12" width="1" height="1" fill="#3A0E15"/><rect x="19" y="12" width="1" height="1" fill="#FF5C6C"/><rect x="2" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="3" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="4" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="5" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="6" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="7" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="8" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="9" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="10" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="11" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="12" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="13" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="14" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="15" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="16" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="17" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="18" y="13" width="1" height="1" fill="#FF5C6C"/><rect x="19" y="13" width="1" height="1" fill="#FF5C6C"/></svg></div>
+        <div class="fbody">
+          <span class="label">À venir</span>
+          <h3>Un cyberdeck</h3>
+          <p>Mon propre ordinateur de poche, fait main et inspiré des réseaux sociaux.</p>
+          <span class="fsee">L'idée derrière →</span>
+        </div>
+      </a>
+      <a class="fcard" href="https://archekozero.github.io/archek-cle/" style="--c:#7FA2FF;--cr:127,162,255">
+        <div class="fscreen"><svg class="fimg" viewBox="0 0 24 14" role="img" aria-label="Clé USB en pixel art, bleu nuit, avec une petite lumière rose" shape-rendering="crispEdges" style="filter:drop-shadow(0 0 18px rgba(127,162,255,.7))"><rect x="2" y="5" width="6" height="4" fill="#C9D3E8"/><rect x="3" y="6" width="2" height="2" fill="#070B24"/><rect x="5" y="6" width="2" height="2" fill="#070B24"/><rect x="8" y="3" width="14" height="8" fill="#A9C4FF"/><rect x="9" y="4" width="12" height="6" fill="#3C5BD6"/><rect x="10" y="5" width="9" height="1" fill="#5B7BF0"/><rect x="11" y="7" width="3" height="2" fill="#070B24"/><rect x="17" y="6" width="3" height="3" fill="#f08ab8"/><rect x="18" y="5" width="1" height="1" fill="#ffd0e6"/></svg></div>
+        <div class="fbody">
+          <span class="label">À venir</span>
+          <h3>Rose sous clé</h3>
+          <p>Rose sur une clé USB qui se lance sur n'importe quel système, inspirée de Capri dans Edgerunners 2.</p>
+          <span class="fsee">L'idée derrière →</span>
+        </div>
+      </a>
+      <a class="fcard" href="https://archekozero.github.io/archek-ia/" style="--c:#FFFFFF;--cr:255,255,255">
+        <div class="fscreen"><svg class="fimg" viewBox="0 0 17 17" role="img" aria-label="Une IA en pixel art, une sphère blanche lumineuse avec deux yeux" shape-rendering="crispEdges" style="filter:drop-shadow(0 0 18px rgba(255,255,255,.75))"><rect x="6" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="11" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="2" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="3" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="3" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="4" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="4" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="5" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="5" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="6" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="6" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="7" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="7" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="8" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="8" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="9" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="9" width="1" height="1" fill="#FFFFFF"/><rect x="1" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="4" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="10" width="1" height="1" fill="#DDE4FF"/><rect x="14" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="15" y="10" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="5" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="11" width="1" height="1" fill="#DDE4FF"/><rect x="13" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="11" width="1" height="1" fill="#FFFFFF"/><rect x="2" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="6" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="12" width="1" height="1" fill="#DDE4FF"/><rect x="12" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="12" width="1" height="1" fill="#FFFFFF"/><rect x="3" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="7" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="8" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="9" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="10" y="13" width="1" height="1" fill="#DDE4FF"/><rect x="11" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="13" y="13" width="1" height="1" fill="#FFFFFF"/><rect x="4" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="11" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="12" y="14" width="1" height="1" fill="#FFFFFF"/><rect x="6" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="7" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="8" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="9" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="10" y="15" width="1" height="1" fill="#FFFFFF"/><rect x="5" y="7" width="2" height="3" fill="#07080C"/><rect x="10" y="7" width="2" height="3" fill="#07080C"/><rect x="15" y="1" width="1" height="1" fill="#FFFFFF"/><rect x="16" y="0" width="1" height="1" fill="#FFFFFF"/><rect x="14" y="0" width="1" height="1" fill="#C9D3FF"/><rect x="1" y="15" width="1" height="1" fill="#FFFFFF"/></svg></div>
+        <div class="fbody">
+          <span class="label">Projet final</span>
+          <h3>Une vraie IA</h3>
+          <p>Une IA gratuite pour tous, née de mes rêves d'enfant.</p>
+          <span class="fsee">L'idée derrière →</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="faq-title">
+    <div class="section-head">
+      <h2 id="faq-title">Questions sur Rose</h2>
+      <span class="label">FAQ</span>
+    </div>
+    <div class="faq">
+      <details><summary>Quand Rose sera-t-elle disponible ?</summary><p>Pas encore : je teste d’abord avec un petit groupe. Rejoins la <a href="#beta">bêta</a> pour être prévenu. À l’installation, Windows pourra afficher un message bleu : Rose n’est pas encore signée numériquement (la signature est payante) et Windows se méfie des programmes peu téléchargés. Il suffira de cliquer sur « Informations complémentaires », puis sur « Exécuter quand même ».</p></details>
+      <details><summary>Mon antivirus la signale, est-ce grave ?</summary><p>Pour fonctionner, Rose simule la souris et le clavier et peut regarder l’écran : certains antivirus la signalent à tort. Tu peux me poser la question sur le <a href="https://discord.gg/nECr5YgWav" target="_blank" rel="noopener">Discord</a> avant de l’installer.</p></details>
+      <details><summary>Qu’est-ce qui sort de mon ordinateur ?</summary><p>Rien n’est envoyé à son auteur. Tes clés restent dans ton propre fichier de réglages. La vision d’écran n’envoie une capture à Claude que si tu l’actives et que tu as mis ta clé. Détails dans les <a href="https://archekozero.github.io/archek-mention-l-gal/">mentions légales</a>.</p></details>
+      <details><summary>Et sur Mac ou Linux ?</summary><p>Rose tourne seulement sous Windows pour l’instant. Le projet <a href="https://archekozero.github.io/archek-cle/">Rose sous clé</a> vise justement n’importe quel système.</p></details>
+      <details><summary>Pourquoi Rose est gratuite ?</summary><p>Parce que je crois que l’IA doit être une alliée pour tous. C’est expliqué dans <a href="https://archekozero.github.io/archek-conviction/">mes convictions</a>, et le but final est <a href="https://archekozero.github.io/archek-ia/">une vraie IA</a> gratuite.</p></details>
+      <details><summary>Un bug, une idée ?</summary><p>Viens m’en parler sur le <a href="https://discord.gg/nECr5YgWav" target="_blank" rel="noopener">Discord</a> ou en message sur <a href="https://www.instagram.com/rose_ai_01/" target="_blank" rel="noopener">Instagram</a>.</p></details>
+    </div>
+  </section>
+
+  <a class="conv par" href="https://archekozero.github.io/parcours/">
+    <span class="label">Qui je suis</span>
+    <strong>Mon parcours</strong>
+    <span>Étudiant ingénieur en informatique à l'EILCO. →</span>
+  </a>
+
+  <a class="conv" href="https://archekozero.github.io/archek-conviction/">
+    <span class="label">Ce en quoi je crois</span>
+    <strong>Mes convictions</strong>
+    <span>L'IA est une alliée pour tous, jamais une remplaçante. →</span>
+  </a>
+
+  <footer>
+    <div class="fcols">
+      <nav class="fcol" aria-label="Rose">
+        <h2 class="fh">Rose</h2>
+        <a href="https://archekozero.github.io/archek-infos-rose.github.io/">Voir l’évolution</a>
+        <a href="#beta">Bêta testeur</a>
+        <a href="#faq">FAQ</a>
+      </nav>
+      <nav class="fcol" aria-label="Projets futurs">
+        <h2 class="fh">Projets futurs</h2>
+        <a href="https://archekozero.github.io/archek-cyberdeck/">Cyberdeck</a>
+        <a href="https://archekozero.github.io/archek-cle/">Rose sous clé</a>
+        <a href="https://archekozero.github.io/archek-ia/">Une vraie IA</a>
+      </nav>
+      <nav class="fcol" aria-label="À propos">
+        <h2 class="fh">À propos</h2>
+        <a href="https://archekozero.github.io/parcours/">Mon parcours</a>
+        <a href="https://archekozero.github.io/archek-conviction/">Mes convictions</a>
+        <a href="https://archekozero.github.io/archek-mention-l-gal/">Mentions légales</a>
+      </nav>
+    </div>
+    <div class="fbase"><span>Archek</span><span>Mis à jour en novembre 2026</span></div>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btns = document.querySelectorAll(".copy");
+  function selectText(el) {
+    try {
+      var r = document.createRange();
+      r.selectNodeContents(el);
+      var s = window.getSelection();
+      s.removeAllRanges();
+      s.addRange(r);
+    } catch (e) {}
+  }
+  Array.prototype.forEach.call(btns, function (btn) {
+    var target = document.getElementById(btn.getAttribute("data-target"));
+    if (!target) return;
+    btn.addEventListener("click", function () {
+      var done = function (msg) {
+        btn.textContent = msg;
+        setTimeout(function () { btn.textContent = "Copier"; }, 1800);
+      };
+      try {
+        navigator.clipboard.writeText(target.textContent.trim()).then(
+          function () { done("Copié"); },
+          function () { selectText(target); done("Sélectionné"); }
+        );
+      } catch (e) {
+        selectText(target);
+        done("Sélectionné");
+      }
+    });
+  });
+})();
+</script>
+
+<script>
+(function () {
+  var cv = document.getElementById("sky");
+  if (!cv || !cv.getContext) return;
+  var ctx = cv.getContext("2d");
+  var reduce = false;
+  try { reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+  var TINTS = ["255,255,255", "200,220,255", "255,232,214", "255,196,224"];
+  var seed = 7;
+  function rnd() { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }
+  var stars = [];
+  for (var i = 0; i < 280; i++) {
+    stars.push({ x: rnd(), y: rnd(), r: 0.4 + Math.pow(rnd(), 3) * 1.6, d: 0.15 + rnd() * 0.85, p: rnd() * 6.283, f: 0.6 + rnd() * 2.2, b: 0.35 + rnd() * 0.65, c: TINTS[Math.floor(rnd() * TINTS.length)] });
+  }
+  var W = 0, H = 0, dpr = 1, energy = 0, lastY = null, running = false;
+  function draw() {
+    var sy = window.pageYOffset || document.documentElement.scrollTop || 0;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, W, H);
+    var n = Math.min(stars.length, Math.max(90, Math.floor(W * H / 4200)));
+    for (var i = 0; i < n; i++) {
+      var s = stars[i];
+      var x = s.x * W;
+      var y = (((s.y * H - sy * s.d * 0.12) % H) + H) % H;
+      var tw = 0.5 + 0.5 * Math.sin(s.p + sy * 0.012 * s.f);
+      var a = Math.min(1, s.b * (0.16 + 0.84 * tw) * (0.85 + energy * 0.9));
+      ctx.fillStyle = "rgba(" + s.c + "," + a.toFixed(3) + ")";
+      ctx.beginPath();
+      ctx.arc(x, y, s.r * (0.85 + 0.3 * tw), 0, 6.283);
+      ctx.fill();
+      if (s.r > 1.3 && tw > 0.75) {
+        var L = s.r * (3 + 4 * energy) * tw;
+        ctx.strokeStyle = "rgba(" + s.c + "," + (a * 0.55).toFixed(3) + ")";
+        ctx.lineWidth = 0.7;
+        ctx.beginPath();
+        ctx.moveTo(x - L, y); ctx.lineTo(x + L, y);
+        ctx.moveTo(x, y - L); ctx.lineTo(x, y + L);
+        ctx.stroke();
+      }
+    }
+  }
+  function loop() {
+    energy *= 0.93;
+    if (energy < 0.02) { energy = 0; running = false; draw(); return; }
+    draw();
+    requestAnimationFrame(loop);
+  }
+  function onScroll() {
+    var y = window.pageYOffset || 0;
+    if (lastY !== null) energy = Math.min(1, energy + Math.abs(y - lastY) / 240);
+    lastY = y;
+    if (!running) { running = true; requestAnimationFrame(loop); }
+  }
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = cv.clientWidth || window.innerWidth;
+    H = cv.clientHeight || window.innerHeight;
+    cv.width = Math.round(W * dpr);
+    cv.height = Math.round(H * dpr);
+    draw();
+  }
+  window.addEventListener("resize", resize);
+  resize();
+  if (!reduce) window.addEventListener("scroll", onScroll, { passive: true });
+})();
+</script>
+
+<script>
+(function () {
+  var card = document.querySelector(".project");
+  var screen = card && card.querySelector(".screen");
+  if (!card || !screen) return;
+  var RADIUS = 260, px = -9999, py = -9999, busy = false;
+  function update() {
+    busy = false;
+    var r = screen.getBoundingClientRect();
+    var dx = Math.max(r.left - px, 0, px - r.right);
+    var dy = Math.max(r.top - py, 0, py - r.bottom);
+    var d = Math.hypot(dx, dy);
+    card.style.setProperty("--near", Math.max(0, 1 - d / RADIUS).toFixed(2));
+  }
+  function ask() { if (!busy) { busy = true; requestAnimationFrame(update); } }
+  addEventListener("pointermove", function (e) { px = e.clientX; py = e.clientY; ask(); }, { passive: true });
+  addEventListener("scroll", ask, { passive: true });
+  document.documentElement.addEventListener("mouseleave", function () { px = py = -9999; ask(); });
+})();
+</script>
+
+
+<script>
+(function () {
+  var d = document, rm = false;
+  try { rm = matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+  d.documentElement.classList.add("js");
+  var els = d.querySelectorAll("header, .section-head, .dl, .project, .fcard, .conv, .faq details, footer");
+  Array.prototype.forEach.call(els, function (el) { el.classList.add("reveal"); });
+  var cards = d.querySelectorAll(".lcard");
+  Array.prototype.forEach.call(cards, function (c) { c.classList.add("reveal"); });
+  function show(el) { el.classList.add("in"); }
+  if ("IntersectionObserver" in window) {
+    var io = new IntersectionObserver(function (es) {
+      var k = 0;
+      es.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.style.setProperty("--i", k++);
+          show(e.target);
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: "0px 0px -6% 0px" });
+    Array.prototype.forEach.call(d.querySelectorAll(".reveal"), function (el) { io.observe(el); });
+  } else { Array.prototype.forEach.call(d.querySelectorAll(".reveal"), show); }
+  if (rm) return;
+  Array.prototype.forEach.call(cards, function (c) {
+    c.addEventListener("pointermove", function (e) {
+      if (e.pointerType === "touch") return;
+      var r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+      c.style.setProperty("--mx", (x * 100) + "%"); c.style.setProperty("--my", (y * 100) + "%");
+      c.style.setProperty("--ry", ((x - .5) * 9).toFixed(2) + "deg"); c.style.setProperty("--rx", ((.5 - y) * 9).toFixed(2) + "deg");
+    });
+    c.addEventListener("pointerleave", function () { c.style.setProperty("--rx", "0deg"); c.style.setProperty("--ry", "0deg"); });
+  });
+})();
+(function () {
+  var m = document.querySelector(".lmail"); if (!m) return;
+  var b = m.querySelector(".copy");
+  m.addEventListener("click", function (e) { if (e.target !== b) b.click(); });
+  m.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); b.click(); } });
+  b.addEventListener("click", function () { m.classList.add("ok"); setTimeout(function () { m.classList.remove("ok"); }, 1800); });
+})();
+</script>
+
+<script>
+(function () {
+  var nav = document.querySelector(".topnav"); if (!nav) return;
+  function s() { nav.classList.toggle("stuck", (window.pageYOffset || 0) > 8); }
+  addEventListener("scroll", s, { passive: true }); s();
+  var cur = nav.querySelector("[aria-current]");
+  if (cur && cur.scrollIntoView && nav.scrollWidth > nav.clientWidth) { nav.scrollLeft = 0; }
+})();
+</script>
+<button id="music" class="music" type="button" aria-pressed="false" aria-label="Activer l’ambiance sonore">
+  <span class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+  <span class="mtxt">Ambiance</span>
+</button>
+<div id="prog" aria-hidden="true"></div>
+<style>
+/* ---- v3 : fenêtres qui se créent au scroll + aura permanente ---- */
+.lcard,.project,.fcard,.dl,.conv{--flash:0 0 90px 8px rgba(var(--cr),.75)}
+@keyframes materialize{
+  0%{opacity:0;transform:translateY(60px) scale(.9);filter:blur(12px);box-shadow:var(--flash,0 0 0 0 transparent)}
+  55%{opacity:1;filter:blur(0)}
+}
+.js .reveal{opacity:0;filter:blur(12px)}
+.js .reveal.in{opacity:1;filter:none;animation:materialize 1.1s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--i,0)*120ms)}
+
+/* aura au repos : elle reste une fois la fenêtre créée */
+.lcard{border-color:rgba(var(--cr),.28);box-shadow:0 12px 34px -16px rgba(var(--cr),.5),0 0 0 1px rgba(var(--cr),.06)}
+.fcard{border-color:rgba(var(--cr),.32);box-shadow:0 0 34px -10px rgba(var(--cr),.45)}
+.project{--cr:240,138,184;--glow:max(var(--near,0),.35)}
+.conv{--cr:180,140,255;border-color:rgba(var(--cr),.32);box-shadow:0 0 34px -12px rgba(var(--cr),.45)}
+.conv.par{--cr:79,227,193}
+
+/* entrée du menu */
+@keyframes pillIn{from{opacity:0;transform:translateY(-12px)}}
+.topnav a{animation:pillIn .6s cubic-bezier(.2,.8,.2,1) backwards;animation-delay:calc(var(--k,0)*55ms)}
+.topnav a:nth-child(2){--k:1}.topnav a:nth-child(3){--k:2}.topnav a:nth-child(4){--k:3}.topnav a:nth-child(5){--k:4}.topnav a:nth-child(6){--k:5}.topnav a:nth-child(7){--k:6}.topnav a:nth-child(8){--k:7}
+
+/* barre de progression */
+#prog{position:fixed;top:0;left:0;width:100%;height:2px;z-index:20;pointer-events:none;transform-origin:0 50%;transform:scaleX(0);background:linear-gradient(90deg,#f08ab8,#A9C4FF,#4FE3C1);box-shadow:0 0 12px rgba(240,138,184,.7)}
+
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal,.js .reveal.in{opacity:1;filter:none;animation:none}
+  .topnav a{animation:none}
+  #prog{display:none}
+}
+</style>
+<script>
+(function () {
+  var p = document.getElementById("prog"); if (!p) return;
+  var busy = false;
+  function u() {
+    busy = false;
+    var h = document.documentElement.scrollHeight - innerHeight;
+    p.style.transform = "scaleX(" + (h > 0 ? Math.min(1, (window.pageYOffset || 0) / h) : 0).toFixed(3) + ")";
+  }
+  addEventListener("scroll", function () { if (!busy) { busy = true; requestAnimationFrame(u); } }, { passive: true });
+  addEventListener("resize", u); u();
+})();
+</script>
+<style>
+/* ---- bouton ambiance ---- */
+.music{position:fixed;z-index:15;right:max(16px,env(safe-area-inset-right,0px));bottom:max(16px,env(safe-area-inset-bottom,0px));display:flex;align-items:center;gap:10px;padding:10px 16px 10px 14px;border-radius:999px;border:1px solid var(--line);background:rgba(10,12,17,.78);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:var(--muted);font-family:var(--font-mono);font-size:12px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:color .2s,border-color .2s,box-shadow .3s}
+.music:hover,.music:focus-visible{color:var(--fg);border-color:var(--accent)}
+.music:focus-visible{outline:2px solid var(--accent-ink);outline-offset:3px}
+.music.on{color:var(--fg);border-color:#f08ab8;box-shadow:0 0 28px -4px rgba(240,138,184,.6)}
+.music:not(.on):not(.seen){animation:nudge 2.6s ease-in-out 2s infinite}
+@keyframes nudge{0%,100%{box-shadow:0 0 0 0 rgba(169,196,255,0)}50%{box-shadow:0 0 0 7px rgba(169,196,255,.14)}}
+.eq{display:flex;align-items:flex-end;gap:2px;width:16px;height:14px}
+.eq i{flex:1;height:30%;background:currentColor;border-radius:1px;transform-origin:50% 100%}
+.music.on .eq i{background:#f08ab8;animation:eq 1s ease-in-out infinite alternate}
+.music.on .eq i:nth-child(2){animation-duration:.7s;animation-delay:-.3s}
+.music.on .eq i:nth-child(3){animation-duration:1.25s;animation-delay:-.6s}
+.music.on .eq i:nth-child(4){animation-duration:.85s;animation-delay:-.15s}
+@keyframes eq{from{height:22%}to{height:100%}}
+@media (max-width:560px){.music{padding:10px 12px}.mtxt{display:none}}
+@media (prefers-reduced-motion:reduce){.music:not(.on):not(.seen){animation:none}.music.on .eq i{animation:none;height:70%}}
+</style>
+<script>
+(function () {
+  var btn = document.getElementById("music"); if (!btn) return;
+  var AC = window.AudioContext || window.webkitAudioContext;
+  if (!AC) { btn.hidden = true; return; }
+  var ctx, master, bus, cvDry, pads = [], on = false, bellT = null, chordT = null, ci = 0;
+  var CHORDS = [
+    [110.00, 164.81, 220.00, 261.63, 329.63, 493.88],   // Am(add9)
+    [87.31, 130.81, 174.61, 220.00, 261.63, 329.63],    // Fmaj7
+    [130.81, 196.00, 261.63, 293.66, 329.63, 392.00],   // C(add9)
+    [98.00, 146.83, 196.00, 220.00, 293.66, 493.88]     // Gsus2
+  ];
+  var BELLS = [440, 523.25, 587.33, 659.25, 783.99, 880, 1046.5, 1318.5];
+
+  function impulse() {
+    var len = Math.floor(ctx.sampleRate * 3.6), b = ctx.createBuffer(2, len, ctx.sampleRate);
+    for (var c = 0; c < 2; c++) {
+      var d = b.getChannelData(c);
+      for (var i = 0; i < len; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, 2.6);
+    }
+    return b;
+  }
+
+  function build() {
+    ctx = new AC();
+    master = ctx.createGain(); master.gain.value = 0;
+    var comp = ctx.createDynamicsCompressor();
+    master.connect(comp); comp.connect(ctx.destination);
+
+    var verb = ctx.createConvolver(); verb.buffer = impulse();
+    var wet = ctx.createGain(); wet.gain.value = 0.75;
+    verb.connect(wet); wet.connect(master);
+    cvDry = ctx.createGain(); cvDry.gain.value = 0.7; cvDry.connect(master);
+
+    bus = ctx.createGain(); bus.connect(verb);
+
+    var filt = ctx.createBiquadFilter();
+    filt.type = "lowpass"; filt.frequency.value = 900; filt.Q.value = 0.5;
+    filt.connect(cvDry); filt.connect(verb);
+
+    var lfo = ctx.createOscillator(), lg = ctx.createGain();
+    lfo.frequency.value = 0.06; lg.gain.value = 350;
+    lfo.connect(lg); lg.connect(filt.frequency); lfo.start();
+
+    CHORDS[0].forEach(function (f, i) {
+      var vg = ctx.createGain(); vg.gain.value = i === 0 ? 0.11 : 0.05;
+      var o1 = ctx.createOscillator(), o2 = ctx.createOscillator();
+      o1.type = "triangle"; o2.type = "sawtooth";
+      o1.frequency.value = f; o2.frequency.value = f; o2.detune.value = 7;
+      var g2 = ctx.createGain(); g2.gain.value = 0.35;
+      o1.connect(vg); o2.connect(g2); g2.connect(vg); vg.connect(filt);
+      o1.start(); o2.start();
+      pads.push([o1, o2]);
+    });
+  }
+
+  function nextChord() {
+    ci = (ci + 1) % CHORDS.length;
+    var t = ctx.currentTime;
+    pads.forEach(function (p, i) {
+      p[0].frequency.setTargetAtTime(CHORDS[ci][i], t, 1.8);
+      p[1].frequency.setTargetAtTime(CHORDS[ci][i], t, 1.8);
+    });
+    chordT = setTimeout(nextChord, 14000);
+  }
+
+  function bell() {
+    var f = BELLS[Math.floor(Math.random() * BELLS.length)], t = ctx.currentTime + 0.05;
+    var o = ctx.createOscillator(), o2 = ctx.createOscillator(), g = ctx.createGain(), g2 = ctx.createGain();
+    o.type = "sine"; o2.type = "sine"; o.frequency.value = f; o2.frequency.value = f * 2.01;
+    g2.gain.value = 0.25;
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(0.11, t + 0.03);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + 4.2);
+    o.connect(g); o2.connect(g2); g2.connect(g);
+    var out = g;
+    if (ctx.createStereoPanner) {
+      var pn = ctx.createStereoPanner(); pn.pan.value = Math.random() * 1.6 - 0.8;
+      g.connect(pn); out = pn;
+    }
+    out.connect(bus); out.connect(cvDry);
+    o.start(t); o2.start(t); o.stop(t + 4.4); o2.stop(t + 4.4);
+    bellT = setTimeout(bell, 1800 + Math.random() * 3600);
+  }
+
+  function start() {
+    if (!ctx) build();
+    ctx.resume();
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setTargetAtTime(0.55, ctx.currentTime, 1.3);
+    on = true;
+    clearTimeout(chordT); clearTimeout(bellT);
+    chordT = setTimeout(nextChord, 14000);
+    bellT = setTimeout(bell, 1200);
+  }
+  function stop() {
+    on = false;
+    clearTimeout(chordT); clearTimeout(bellT);
+    master.gain.cancelScheduledValues(ctx.currentTime);
+    master.gain.setTargetAtTime(0, ctx.currentTime, 0.4);
+    setTimeout(function () { if (!on && ctx) ctx.suspend(); }, 2000);
+  }
+
+  btn.addEventListener("click", function () {
+    btn.classList.add("seen");
+    if (on) stop(); else start();
+    btn.classList.toggle("on", on);
+    btn.setAttribute("aria-pressed", on ? "true" : "false");
+    btn.setAttribute("aria-label", on ? "Couper l’ambiance sonore" : "Activer l’ambiance sonore");
+  });
+  document.addEventListener("visibilitychange", function () {
+    if (!ctx || !on) return;
+    if (document.hidden) ctx.suspend(); else ctx.resume();
+  });
+})();
+</script>
+<script id="da-js">/* ===== DA Archek — fond étoilé, HUD, chargement, glitch ===== */
+(function () {
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var PAGE = document.documentElement.getAttribute('data-da-page') || document.title;
+
+  // ---------- fond étoilé (pixels, parallaxe, étoiles filantes) ----------
+  var cv = document.createElement('canvas'); cv.id = 'da-stars'; cv.setAttribute('aria-hidden', 'true');
+  document.body.insertBefore(cv, document.body.firstChild);
+  var ctx = cv.getContext('2d'), W = 0, H = 0, dpr = 1, stars = [], shoots = [];
+  var ACC = (getComputedStyle(document.documentElement).getPropertyValue('--da-acc-rgb') || '255,45,74').trim();
+  var COLS = ['242,239,233', '242,239,233', '242,239,233', '220,225,240', ACC, ACC];
+  function seed() {
+    stars = [];
+    var n = Math.round(W * H / 2600);
+    for (var i = 0; i < n; i++) {
+      var d = Math.random();
+      stars.push({ x: Math.random() * W, y: Math.random() * H, d: d, s: d > .93 ? 2 : 1,
+        c: COLS[Math.floor(Math.random() * COLS.length)], p: Math.random() * 6.28, f: .5 + Math.random() * 2 });
+    }
+  }
+  function resize() {
+    dpr = Math.min(2, window.devicePixelRatio || 1);
+    W = innerWidth; H = innerHeight;
+    cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0); ctx.imageSmoothingEnabled = false;
+    seed();
+  }
+  var t0 = performance.now();
+  function draw(now) {
+    var t = (now - t0) / 1000, sy = window.pageYOffset || 0;
+    ctx.clearRect(0, 0, W, H);
+    for (var i = 0; i < stars.length; i++) {
+      var s = stars[i];
+      var y = ((s.y - sy * (0.04 + s.d * 0.22)) % H + H) % H;
+      var tw = reduce ? 1 : (Math.sin(s.p + t * s.f) > -0.2 ? 1 : 0.35);
+      ctx.fillStyle = 'rgba(' + s.c + ',' + ((0.2 + s.d * 0.6) * tw).toFixed(2) + ')';
+      var px = s.s;
+      ctx.fillRect(Math.round(s.x), Math.round(y), px, px);
+      if (s.s === 2 && tw === 1 && s.d > .97) { // petite croix pixel
+        ctx.fillRect(Math.round(s.x) - 2, Math.round(y), 1, 1); ctx.fillRect(Math.round(s.x) + 3, Math.round(y), 1, 1);
+        ctx.fillRect(Math.round(s.x), Math.round(y) - 2, 1, 1); ctx.fillRect(Math.round(s.x), Math.round(y) + 3, 1, 1);
+      }
+    }
+    if (!reduce && Math.random() < 0.004 && shoots.length < 2)
+      shoots.push({ x: Math.random() * W, y: Math.random() * H * .5, vx: -(4 + Math.random() * 4), vy: 2 + Math.random() * 2, l: 1 });
+    for (var k = shoots.length - 1; k >= 0; k--) {
+      var o = shoots[k]; o.x += o.vx; o.y += o.vy; o.l -= 0.02;
+      for (var j = 0; j < 14; j++) {
+        ctx.fillStyle = 'rgba(242,239,233,' + (o.l * (1 - j / 14)).toFixed(2) + ')';
+        ctx.fillRect(Math.round(o.x - o.vx * j * .5), Math.round(o.y - o.vy * j * .5), 2, 2);
+      }
+      if (o.l <= 0) shoots.splice(k, 1);
+    }
+    requestAnimationFrame(draw);
+  }
+  addEventListener('resize', resize); resize(); requestAnimationFrame(draw);
+
+  // ---------- couches : vignette, scanlines, glitch, fondu ----------
+  ['da-vig', 'da-scan', 'da-gl', 'da-fade'].forEach(function (id) { var d = document.createElement('div'); d.id = id; document.body.appendChild(d); });
+  var gl = document.getElementById('da-gl'), fade = document.getElementById('da-fade');
+  function glitch(ms) {
+    if (reduce) return;
+    gl.innerHTML = '';
+    for (var i = 0; i < 6; i++) {
+      var d = document.createElement('div');
+      d.style.top = (Math.random() * 100) + '%'; d.style.height = (1 + Math.random() * 7) + '%';
+      d.style.background = ['rgba(' + ACC + ',.28)', 'rgba(255,255,255,.14)', 'rgba(' + ACC + ',.16)'][i % 3];
+      gl.appendChild(d);
+    }
+    var end = performance.now() + (ms || 380), shake = [].slice.call(document.querySelectorAll('main,.wrap'));
+    (function jit() {
+      var kids = gl.children;
+      for (var i = 0; i < kids.length; i++) kids[i].style.transform = 'translateX(' + ((Math.random() - .5) * 60) + 'px)';
+      shake.forEach(function (m) { m.style.transform = 'translateX(' + ((Math.random() - .5) * 5) + 'px)'; });
+      if (performance.now() < end) requestAnimationFrame(jit); else { gl.innerHTML = ''; shake.forEach(function (m) { m.style.transform = ''; }); }
+    })();
+    var h1 = document.querySelector('h1');
+    if (h1) { h1.classList.remove('da-glitch'); void h1.offsetWidth; h1.classList.add('da-glitch'); }
+  }
+  window.daGlitch = glitch;
+  setInterval(function () { if (Math.random() < .2) glitch(110); }, 12000);
+
+  // ---------- HUD ----------
+  var hud = document.createElement('div'); hud.id = 'da-hud';
+  hud.innerHTML = '<div><b>ARCHEK</b><span class="pg"></span><div class="bar"><i></i></div></div><div class="hint">Scroll ↓</div>';
+  hud.querySelector('.pg').textContent = '— ' + PAGE;
+  document.body.appendChild(hud);
+  var bar = hud.querySelector('.bar i'), hint = hud.querySelector('.hint');
+  if (document.getElementById('music')) hint.style.display = 'none';
+  function onScroll() {
+    var max = document.documentElement.scrollHeight - innerHeight;
+    var p = max > 0 ? Math.min(1, (window.pageYOffset || 0) / max) : 1;
+    bar.style.width = (p * 100) + '%'; hint.style.opacity = p > .97 ? 0 : '';
+  }
+  addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // ---------- chargement (une fois par session) ----------
+  var seen = false; try { seen = sessionStorage.getItem('da-loaded') === '1'; sessionStorage.setItem('da-loaded', '1'); } catch (e) {}
+  if (!seen && !reduce) {
+    var L = document.createElement('div'); L.id = 'da-load';
+    L.innerHTML = '<div class="lt">LOADING</div><div class="bar"><i></i></div><div class="pct">000%</div>';
+    document.body.appendChild(L);
+    var bi = L.querySelector('.bar i'), pc = L.querySelector('.pct'), s0 = performance.now();
+    requestAnimationFrame(function () { bi.style.width = '100%'; });
+    (function cnt() {
+      var k = Math.min(1, (performance.now() - s0) / 800);
+      pc.textContent = String(Math.round(k * 100)).padStart(3, '0') + '%';
+      if (k < 1) requestAnimationFrame(cnt); else { L.classList.add('out'); glitch(450); setTimeout(function () { L.remove(); }, 700); }
+    })();
+  } else { setTimeout(function () { glitch(300); }, 60); }
+
+  // ---------- transition entre pages du site ----------
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.metaKey || e.ctrlKey || e.shiftKey || a.target === '_blank') return;
+    var url; try { url = new URL(a.getAttribute('href'), location.href); } catch (x) { return; }
+    if (url.origin !== location.origin || (url.pathname === location.pathname && url.hash)) return;
+    e.preventDefault(); glitch(320); fade.style.opacity = 1;
+    setTimeout(function () { location.href = url.href; }, 300);
+  });
+  addEventListener('pageshow', function () { fade.style.opacity = 0; });
+})();
+</script></body></html>
