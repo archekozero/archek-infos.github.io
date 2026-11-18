@@ -130,89 +130,36 @@
 </script>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"}}</script>
 <script>
-// Voxel rose generator — returns [{x,y,z,c}] with c as hex int
+// Rose en voxels : le sprite pixel art de Rose, extrude en 3D (relief arrondi, dos de la tete et du pull)
+// returns [{x,y,z,c}] with c as hex int
+const ROSE_PIX = [[null, null, null, null, null, null, "#fdac5c", "#fcac5b", "#fdad58", "#f8a85d", null, null, null, null, null, null], [null, null, null, null, "#fbae5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fdad5f", "#fbae5b", null, null, null, null], [null, null, "#faaf5b", "#fcab59", "#fbad5b", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#faab5a", "#fdaf5e", "#feaf5a", "#f9a95e", null, null], [null, "#fcac5b", "#fdad5b", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#feaf5e", "#fea95c", "#fbad60", null], [null, "#faad59", "#feab5e", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#fead5c", "#feaa5d", "#fdac5c", "#f9ac5a", null], [null, "#b93a22", "#feab5a", "#fbab5d", "#faac5a", "#fbad5b", "#fba95b", "#feb15f", "#fdaf5f", "#fcaa59", "#fdae5e", "#feac60", "#faad5a", "#f9af59", "#c23825", null], [null, null, "#271e2c", "#be3a20", "#fdab5c", "#ffaf5d", "#faa95e", "#f6af5a", "#fcac5c", "#fea961", "#faaf59", "#faad5b", "#c23a25", "#bd3a20", "#2a2428", null], [null, "#2c2029", "#2b252e", "#2b202a", "#2c1d28", "#c13c20", null, null, "#be3822", "#be3e24", null, null, "#bf3b24", "#2a2129", "#291e2a", "#282028"], [null, null, "#2e383a", "#2d383a", "#272128", "#bf3922", null, "#e7f2f7", "#cd7c23", "#d1792a", "#e5f0f5", null, "#c13b22", "#2a2129", "#2a212a", null], [null, null, "#2c3937", "#2d3738", "#292228", "#bf3a20", "#d37d2a", "#d37e29", "#d37e29", "#d37e29", "#d07c2a", "#d07d28", "#c33c24", "#2a1c28", "#292029", null], [null, null, "#2c3635", "#293737", "#30393f", "#c03b1f", "#d27b2b", "#d17b2a", "#d17b2a", "#d17b2a", "#d17e29", "#ce7d23", "#c33922", "#2c212e", "#292327", null], [null, null, null, "#303738", "#2a3837", null, "#bf3820", "#c03b22", "#c23a28", "#c23926", "#c43d23", "#bd3620", null, "#26212c", null, null], [null, "#6d5f84", "#695f84", "#e733af", "#e633b3", "#e133ab", "#e235b1", "#e834b0", "#e4f0fa", "#dff0f8", "#e331ac", "#e138af", "#df36af", "#775f85", "#705d83", null], [null, "#6e6187", "#6e6085", "#e034ad", "#e437b2", "#e335b0", "#df35ad", "#e635b3", "#e7f2fa", "#e2f0f5", "#e732b1", "#e834b4", "#6e5f88", "#6f6082", "#6b5e87", null], [null, null, "#6c6087", "#e233b0", "#e535b1", "#e335b0", "#e235af", "#e6f1f9", "#e7f0fa", "#e132ae", "#df34ad", "#e236b0", "#e232a9", "#e633b0", null, null], [null, null, "#e034b1", "#e333ae", "#e034ac", "#e336af", "#e235b5", "#e5f0f8", "#e8f0f5", "#e134b0", "#e234b0", "#e335b0", "#e637b2", "#df33aa", null, null], [null, null, null, "#e136a8", "#e034b0", "#e634ad", "#e0f1f9", "#e4eff9", "#e834b1", "#de37b2", "#e534b0", "#e335b0", "#e336af", null, null, null], [null, null, null, null, "#e234b4", "#e234b3", "#e4f2f7", "#e7f1f8", "#e334b3", "#e335b0", "#e335b0", "#e335b0", "#e335b3", null, null, null]];
 function buildRose() {
   const vox = new Map();
   const put = (x, y, z, c) => { vox.set(x + ',' + y + ',' + z, { x, y, z, c }); };
-  const TAU = Math.PI * 2;
-  const ss = (a, b, t) => { t = Math.min(1, Math.max(0, (t - a) / (b - a))); return t * t * (3 - 2 * t); };
-  const mix = (c1, c2, t) => {
-    const r = ((c1 >> 16) & 255) * (1 - t) + ((c2 >> 16) & 255) * t;
-    const g = ((c1 >> 8) & 255) * (1 - t) + ((c2 >> 8) & 255) * t;
-    const b = (c1 & 255) * (1 - t) + (c2 & 255) * t;
-    return (Math.round(r) << 16) | (Math.round(g) << 8) | Math.round(b);
-  };
-  // ---- Head ----
-  const yMin = -6, yMax = 8;
-  const R = (y) => 3.2 + 5.6 * Math.sqrt(ss(-7, 3, y)) + 1.2 * ss(4, 8, y); // cup radius by height
-  for (let y = yMin; y <= yMax; y++) {
-    for (let x = -11; x <= 11; x++) {
-      for (let z = -11; z <= 11; z++) {
-        const r = Math.hypot(x, z);
-        let th = Math.atan2(z, x); if (th < 0) th += TAU;
-        const Ry = R(y);
-        const rimH = 5.2 + 1.8 * Math.cos(5 * th + 0.4) + 0.6 * Math.cos(9 * th);
-        const t = (y - yMin) / (yMax - yMin);
-        // outer petals: shell
-        if (Math.abs(r - Ry) < 0.75 && y <= rimH) {
-          const edge = ss(rimH - 2.5, rimH, y);
-          put(x, y, z, mix(mix(0x8e0b2b, 0xd61a46, t), 0xff6b81, edge * 0.8));
-          continue;
-        }
-        // receptacle fill
-        if (y <= -4 && r < Ry) { put(x, y, z, 0x5e0618); continue; }
-        // inner spiral petals
-        if (r < Ry - 0.9 && r > 0.4) {
-          const b = 0.36;
-          let best = 1e9;
-          for (let k = 0; k < 6; k++) { const d = Math.abs(r - b * (th + TAU * k)); if (d < best) best = d; }
-          const innerH = 6.6 - r * 0.28 + 0.7 * Math.cos(3 * th);
-          if (best < 0.55 && y <= innerH && y >= -4) {
-            const edge = ss(innerH - 2, innerH, y);
-            put(x, y, z, mix(mix(0x5a0418, 0xb8123a, t), 0xff4d6d, edge * 0.7));
-          }
-        } else if (r <= 0.4 && y <= 6) {
-          put(x, y, z, 0x6a0520);
-        }
-      }
+  const hex = (h) => parseInt(h.slice(1), 16);
+  const dark = (c, k) => (Math.round(((c >> 16) & 255) * k) << 16) | (Math.round(((c >> 8) & 255) * k) << 8) | Math.round((c & 255) * k);
+  const rows = ROSE_PIX.length, cols = ROSE_PIX[0].length, S = 2;          // 1 pixel du sprite = 2 x 2 voxels
+  const HAIR = 0x2b222b, HAT = 0xfead5c;
+  for (let y = 0; y < rows; y++) for (let x = 0; x < cols; x++) {
+    const h = ROSE_PIX[y][x]; if (!h) continue;
+    const c = hex(h);
+    const u = (x + 0.5 - cols / 2) / (cols / 2 + 0.6);
+    let D = Math.round(S * (1.2 + 2.3 * Math.sqrt(Math.max(0, 1 - u * u))));   // plus epais au milieu : forme arrondie
+    if (y <= 6) D += 1;                                                    // le chapeau deborde un peu
+    // couleur du dos : chapeau orange, cheveux sombres derriere le visage, pull plus fonce
+    const r = (c >> 16) & 255, g = (c >> 8) & 255;
+    const isHat = r > 230 && g > 140;
+    const back = y <= 6 ? (isHat ? dark(HAT, .85) : dark(c, .8)) : y <= 11 ? HAIR : dark(c, .72);
+    for (let vy = 0; vy < S; vy++) for (let vx = 0; vx < S; vx++) {
+      const X = x * S + vx - cols * S / 2, Y = (rows - 1 - y) * S + (S - 1 - vy);
+      for (let z = -D; z <= D; z++) put(X, Y, z, z >= 0 ? c : back);
     }
   }
-  // sepals
-  for (let i = 0; i < 5; i++) {
-    const a = i / 5 * TAU + 0.3;
-    for (let s = 0; s < 5; s++) {
-      const rr = 2.5 + s * 0.9, yy = -6 - Math.round(s * 0.35) + (s > 3 ? 1 : 0);
-      put(Math.round(Math.cos(a) * rr), yy, Math.round(Math.sin(a) * rr), mix(0x2f7d32, 0x1b4d1e, s / 5));
-    }
-  }
-  // ---- Stem ----
-  const stemX = (y) => Math.round(Math.sin(y * 0.13) * 1.6);
-  for (let y = -7; y >= -30; y--) {
-    const sx = stemX(y);
-    for (let dx = 0; dx <= 1; dx++) for (let dz = 0; dz <= 1; dz++)
-      put(sx + dx, y, dz, (y + dx + dz) % 3 === 0 ? 0x2e7d32 : 0x3b9a3f);
-    if (y % 5 === 0) put(sx + (y % 10 === 0 ? 2 : -1), y, 0, 0x7a4a1c); // thorns
-  }
-  // ---- Leaves ----
-  const leaf = (y0, dir, tilt) => {
-    const sx = stemX(y0);
-    const L = 9;
-    for (let u = 1; u <= L; u++) {
-      const half = 3.2 * Math.sin(Math.PI * u / (L + 1));
-      for (let w = -4; w <= 4; w++) {
-        if (Math.abs(w) > half) continue;
-        const x = sx + dir * u;
-        const y = y0 + Math.round(u * 0.45 - (u * u) * 0.03 + w * 0.8);
-        const z = Math.round(w * 0.6 + u * tilt);
-        const vein = w === 0;
-        put(x, y, z, vein ? 0x9ccc65 : (Math.abs(w) > half - 1 ? 0x1f5e22 : 0x43a047));
-      }
-    }
-  };
-  leaf(-15, 1, 0.15);
-  leaf(-21, -1, -0.2);
+  // on ne garde que la surface (les cubes caches a l'interieur ne servent a rien)
+  const has = (x, y, z) => vox.has(x + ',' + y + ',' + z);
+  const arr = [...vox.values()].filter(v => !(has(v.x + 1, v.y, v.z) && has(v.x - 1, v.y, v.z) && has(v.x, v.y + 1, v.z) &&
+                                              has(v.x, v.y - 1, v.z) && has(v.x, v.y, v.z + 1) && has(v.x, v.y, v.z - 1)));
   // center on bounding box
-  const arr = [...vox.values()];
   let mnY = 1e9, mxY = -1e9; arr.forEach(v => { mnY = Math.min(mnY, v.y); mxY = Math.max(mxY, v.y); });
   const cy = (mnY + mxY) / 2;
   arr.forEach(v => v.y -= cy);
@@ -790,14 +737,12 @@ const S3 = (() => {
   const keyG = new THREE.BoxGeometry(0.17, 0.08, 0.17), keys = new THREE.InstancedMesh(keyG, beigeD, 14 * 4), km = new THREE.Matrix4();
   let ki = 0; for (let r = 0; r < 4; r++) for (let c = 0; c < 14; c++) { km.makeTranslation(-1.3 + c * 0.2, 0.17, -4.25 + r * 0.22); keys.setMatrixAt(ki++, km); }
   scene.add(keys);
-  // petite rose en voxels dans un vase, à côté
+  // Rose en voxels, debout sur le bureau à côté de l’écran
   const vox = S0.roseVox;
   const rm = new THREE.InstancedMesh(new THREE.BoxGeometry(.94, .94, .94), new THREE.MeshStandardMaterial({ roughness: .5 }), vox.length);
   const cc = new THREE.Color(), m4 = new THREE.Matrix4();
   vox.forEach((v, i) => { m4.makeTranslation(v.x, v.y, v.z); rm.setMatrixAt(i, m4); cc.setHex(v.c); rm.setColorAt(i, cc); });
-  const rose = new THREE.Group(); rose.add(rm); rose.scale.setScalar(0.035); rose.position.set(2.6, 1.15, -6); scene.add(rose);
-  const vase = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.17, 0.6, 8), new THREE.MeshStandardMaterial({ color: 0x2b3a66, roughness: .3, metalness: .3 }));
-  vase.position.set(2.6, 0.3, -6); scene.add(vase);
+  const rose = new THREE.Group(); rose.add(rm); rose.scale.setScalar(0.035); rose.position.set(2.6, 0.62, -6); rose.rotation.y = -0.45; scene.add(rose);
   // fond étoilé (fenêtre sur le ciel)
   { const n = 1500, a = new Float32Array(n * 3);
     for (let i = 0; i < n; i++) { a[i * 3] = (Math.random() - .5) * 120; a[i * 3 + 1] = Math.random() * 60 - 10; a[i * 3 + 2] = -40 - Math.random() * 40; }
