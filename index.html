@@ -144,7 +144,7 @@ function buildRose() {
     const h = ROSE_PIX[y][x]; if (!h) continue;
     const c = hex(h);
     const u = (x + 0.5 - cols / 2) / (cols / 2 + 0.6);
-    let D = Math.round(S * (1.2 + 2.3 * Math.sqrt(Math.max(0, 1 - u * u))));   // plus epais au milieu : forme arrondie
+    let D = Math.round(S * (0.5 + 1.5 * Math.sqrt(Math.max(0, 1 - u * u))));   // plus epais au milieu : forme arrondie
     if (y <= 6) D += 1;                                                    // le chapeau deborde un peu
     // couleur du dos : chapeau orange, cheveux sombres derriere le visage, pull plus fonce
     const r = (c >> 16) & 255, g = (c >> 8) & 255;
@@ -337,7 +337,7 @@ const S0 = (() => {
       e: dir, ek: 15 + rnd() * 45
     };
   });
-  const rose = new THREE.Group(); rose.add(mesh); rose.scale.setScalar(0.1); scene.add(rose);
+  const rose = new THREE.Group(); rose.add(mesh); rose.scale.setScalar(0.085); rose.position.y = 0.35; scene.add(rose);
   const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), sc = new THREE.Vector3(), p = new THREE.Vector3();
   let assembleStart = -1;
   const startAssemble = (time) => { assembleStart = time; };
@@ -357,7 +357,7 @@ const S0 = (() => {
       m4.compose(p, q, sc); mesh.setMatrixAt(i, m4);
     }
     mesh.instanceMatrix.needsUpdate = true;
-    rose.rotation.y = time * 0.35 + pointer.sx * 0.6;
+    rose.rotation.y = Math.sin(time * 0.5) * 0.85 + pointer.sx * 0.6;   // Rose se balance et reste tournee vers toi
     rose.rotation.x = pointer.sy * 0.15;
     rim.intensity = 40 + Math.sin(time * 2) * 10;
     dust.rotation.y = time * 0.02; skyStars.rotation.y = time * 0.01;
