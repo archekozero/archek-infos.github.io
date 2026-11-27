@@ -382,8 +382,8 @@ html{scroll-padding-top:72px;scroll-behavior:smooth}
       <span class="label">3 étapes prévues</span>
     </div>
     <div class="fcards">
-      <a class="fcard fc-eye" href="https://archekozero.github.io/archek-cyberdeck/" style="--c:#E8E8E8;--cr:232,232,232">
-        <div class="fscreen fs-eye"><canvas class="deck-eye" width="320" height="200" role="img" aria-label="Un œil fait de lignes de code, qui suit la souris"></canvas></div>
+      <a class="fcard fc-eye fc-yel" href="https://archekozero.github.io/archek-cyberdeck/" style="--c:#0A0A0A;--cr:246,211,0">
+        <div class="fscreen fs-eye"><span class="yst" aria-hidden="true">✦</span><span class="yst y2" aria-hidden="true">✦</span><img class="deck-3d" src="https://archekozero.github.io/archek-cyberdeck/deck-01.png" alt="Un cyberdeck en 3D : une mallette dorée ouverte, avec un écran et un clavier" width="420" height="332" loading="lazy"></div>
         <div class="fbody">
           <span class="label lab-next">Prochain projet</span>
           <h3>Un cyberdeck</h3>
@@ -1161,22 +1161,16 @@ function explodedView(host, parts, { cam = [0, 3, 16], look = [0, 0, 0], list = 
 const vxGo=(host,el)=>{const run=()=>voxelArt(host,el);if(el.tagName==='IMG'&&!el.complete)el.addEventListener('load',run,{once:true});else run();host.removeAttribute('title');};
 document.querySelectorAll('.project .screen').forEach(h=>{const e=h.querySelector('img,svg');if(e)vxGo(h,e);});
 document.querySelectorAll('.fcard .fscreen').forEach(h=>{const e=h.querySelector('svg');if(e)vxGo(h,e);});
-</script><style id="deck-eye-css">.fs-eye{position:relative;overflow:hidden}.fs-eye .deck-eye{display:block;width:100%;max-width:240px;height:auto;filter:drop-shadow(0 0 14px rgba(232,232,232,.25))}.fc-eye{background:#000 !important}.lab-next{color:#E8E8E8 !important;border-color:#E8E8E8 !important}</style>
-<script>(function(){var e=document.querySelector('.deck-eye');if(!e||!e.getContext)return;
-var x=e.getContext('2d'),W=320,H=200,cols=64,rows=26,cw=W/cols,rh=H/rows,ix=0,iy=0,MX=-1,MY=-1,blink=0,nb=performance.now()+2500,
-CODE="const deck = useProjet(\"prochain\", { max: 200 }); return <Boite><Raspberry modele=\"pi 4\" /><Ecran pouces={7} /></Boite>; ";
-addEventListener('mousemove',function(ev){MX=ev.clientX;MY=ev.clientY},{passive:true});
-var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
-function f(t){var r=e.getBoundingClientRect();
- if(r.bottom>0&&r.top<innerHeight){
- if(MX>=0){var dx=MX-(r.left+r.width/2),dy=MY-(r.top+r.height/2),d=Math.hypot(dx,dy)||1,k=Math.min(1,d/360);ix+=((dx/d)*k*.42-ix)*.15;iy+=((dy/d)*k*.32-iy)*.15}
- if(!reduce&&t>nb){blink=1e-3;nb=t+2800+Math.random()*3500}
- var open=1;if(blink>0){open=Math.abs(Math.cos(blink*Math.PI));blink+=.09;if(blink>=1)blink=0}
- x.clearRect(0,0,W,H);x.font="600 7px 'JetBrains Mono', monospace";x.textBaseline='top';
- for(var j=0;j<rows;j++)for(var i=0;i<cols;i++){var u=(i+.5)/cols*2-1,v=(j+.5)/rows*2-1,lid=.92*Math.pow(Math.max(0,1-u*u),.85)*Math.max(.04,open),av=Math.abs(v);
-  if(av>lid+.07)continue;var px=(u-ix)*160/100,py=v-iy*.9,rr=Math.hypot(px,py),b,col='236,236,236';
-  if(av>lid-.04)b=.9;else if(rr<.2)continue;else if(rr<.27)b=1;else if(rr<.6){var a=Math.atan2(py,px);b=.45+.55*Math.abs(Math.sin(a*9+rr*14))}else if(rr<.66)b=.85;else b=.08+.08*(1-av/lid);
-  x.fillStyle='rgba('+col+','+b.toFixed(2)+')';x.fillText(CODE[(j*cols+i+j*5)%CODE.length],i*cw,j*rh)}}
- requestAnimationFrame(f)}
-requestAnimationFrame(f)})();</script>
+</script><style id="deck-eye-css">.fs-eye{position:relative;overflow:hidden}
+.fc-yel{background:#F6D300 !important;border-color:#0A0A0A !important;box-shadow:0 0 40px -12px rgba(246,211,0,.6) !important}
+.fc-yel h3,.fc-yel p,.fc-yel .label,.fc-yel .fsee{color:#0A0A0A !important}
+.fc-yel h3{font-weight:900 !important;letter-spacing:-.02em}
+.fc-yel .label{border-color:#0A0A0A !important}
+.fc-yel .fscreen{background:transparent !important}
+.deck-3d{display:block;width:88%;max-width:190px;margin:0 auto;height:auto;filter:drop-shadow(0 14px 18px rgba(0,0,0,.35));animation:dk 4s ease-in-out infinite;position:relative;z-index:1}
+@keyframes dk{50%{transform:translateY(-6px) rotate(-2deg)}}
+.yst{position:absolute;left:12%;top:14%;font-size:16px;color:#0A0A0A;animation:tw2 3s ease-in-out infinite}.yst.y2{left:auto;right:10%;top:auto;bottom:16%;font-size:11px;animation-delay:-1.4s}
+@keyframes tw2{50%{transform:scale(.5) rotate(30deg);opacity:.5}}
+@media (prefers-reduced-motion:reduce){.deck-3d,.yst{animation:none}}</style>
+
 </body></html>
